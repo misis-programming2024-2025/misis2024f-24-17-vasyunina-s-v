@@ -149,5 +149,10 @@ bool operator!=(const Complex& lhs, const Complex& rhs) {
     return !(lhs == rhs);
 }
 
-//новые операторы
-
+//новые методы
+Complex conjugate(const Complex& lhs) {
+  return Complex(lhs.re, -lhs.im); //возвращает сопряженное комплексное число(a + b*i -> a - b*i)
+}
+double magnitude(const Complex& lhs) {
+  return std::sqrt(lhs.re * lhs.re + lhs.im * lhs.im); // возвращает модуль комплексного числа
+}

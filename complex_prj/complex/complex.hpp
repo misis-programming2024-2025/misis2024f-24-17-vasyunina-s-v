@@ -48,4 +48,7 @@ bool operator==(const Complex& lhs, const Complex& rhs);
 bool operator!=(const Complex& lhs, const Complex& rhs);
 std::ostream& operator<<(std::ostream& out, const Complex& z);
 std::istream& operator>>(std::istream& in, Complex& z);
+//новые методы
+Complex conjugate(const Complex& lhs);
+double magnitude(const Complex& lhs);
 #endif 
