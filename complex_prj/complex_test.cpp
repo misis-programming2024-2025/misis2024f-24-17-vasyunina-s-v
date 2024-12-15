@@ -58,6 +58,8 @@ bool testOperatorOutput() {
     return output.str() == "{1.0,2.0}"; 
 }
 
+
+
 int main() {
     std::cout << "Test Constructor: " 
               << (testConstructor(1.2, 4.3) ? "Passed" : "Failed") << std::endl;
