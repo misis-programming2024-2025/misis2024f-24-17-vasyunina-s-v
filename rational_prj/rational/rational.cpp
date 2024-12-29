@@ -206,11 +206,13 @@ Rational operator*(const Rational& lhs, const int64_t rhs) noexcept {
     return ans;
 }
 Rational operator/(const Rational& lhs, const int64_t rhs) {
+    if (rhs == 0){
+        throw std::invalid_argument("Denominator cannot be zero");
+    }
     Rational ans = lhs;
     ans /= rhs;
     return ans;
 }
-
 
 //арифметические операции между рацмональным числом и созданным оъектом класса
 Rational operator+(const int64_t lhs, const Rational& rhs) noexcept {
