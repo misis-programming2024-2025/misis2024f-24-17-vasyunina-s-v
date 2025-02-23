@@ -1,0 +1,5 @@
+add_subdirectory(vector)
+
+add_executable(vector_tests vector_tests.cpp)
+target_link_libraries(vector_tests vector)
+target_include_directories(vector_tests PUBLIC vector_prj)

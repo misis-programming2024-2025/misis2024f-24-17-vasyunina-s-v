@@ -10,6 +10,8 @@ Complex::Complex(const double re, const double im)
     : re(re), im(im)
 {}
 
+Complex::Complex(const Complex& other) : re(other.re), im(other.im) {}
+
 Complex& Complex::operator+=(const Complex& rhs) {
     re += rhs.re;
     im += rhs.im;
