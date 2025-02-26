@@ -1,0 +1,5 @@
+rectory(StackArrT)
+
+add_executable(StackArrT_tests StackArrT_tests.cpp)
+target_link_libraries(StackArrT_tests StackArrT)
+target_include_directories(StackArrT_tests PUBLIC StackArrT_prj)
