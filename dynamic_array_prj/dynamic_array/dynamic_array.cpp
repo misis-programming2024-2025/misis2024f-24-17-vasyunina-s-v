@@ -53,17 +53,16 @@ bool DynamicArray::empty() const{
 }; 
 
 //добавление в конец массива
-void DynamicArray::push_back(int value){
-    if (size != capacity){
-        *(data + 1) = value;
-    } else {
-        capacity = capacity * 2;
+void DynamicArray::push_back(int value) {
+    if (size >= capacity) {
+        capacity = (capacity == 0) ? 1 : capacity * 2;
         int* new_data = new int[capacity];
         std::copy(data, data + size, new_data);
         delete[] data;
         data = new_data;
-        *(data + 1) = value;
     }
+    data[size] = value;
+    size++;
 }
 
 //удаление с конца массива
