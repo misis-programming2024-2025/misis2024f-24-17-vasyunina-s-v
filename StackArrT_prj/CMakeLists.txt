@@ -1,4 +1,4 @@
-rectory(StackArrT)
+add_subdirectory(StackArrT)
 
 add_executable(StackArrT_tests StackArrT_tests.cpp)
 target_link_libraries(StackArrT_tests StackArrT)

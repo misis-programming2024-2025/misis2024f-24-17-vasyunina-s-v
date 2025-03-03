@@ -2,7 +2,7 @@
 #include <iostream>
 
 //конструктор
-DynamicArray::DynamicArray(int64_t size = 0, int value = 0) : size(size), capacity(size) {
+DynamicArray::DynamicArray(int64_t size, int value) : size(size), capacity(size) {
     if (size > 0) {
         data = new int[size];
         std::fill(data, data + size, value);
