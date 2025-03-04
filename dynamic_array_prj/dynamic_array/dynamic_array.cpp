@@ -98,6 +98,8 @@ void DynamicArray::resize(int64_t new_size){
         std::fill(new_data + size, new_data + new_size, 0);
         delete[] data;
         data = new_data;
+    }  else if (new_size < size) {
+        std::fill(data + new_size, data + size, 0);
     }
     size = new_size;
 }
@@ -106,9 +108,10 @@ void DynamicArray::resize(int64_t new_size){
 //меняется размер масиива и он заполняется value
 void DynamicArray::assign(int64_t new_size, int value){
     if (new_size > capacity) {
+        int* new_data = new int[new_size]; 
+        delete[] data;                     
+        data = new_data;
         capacity = new_size;
-        delete[] data;
-        data = new int[capacity];
     }
     size = new_size;
     std::fill(data, data + size, value);
@@ -118,15 +121,17 @@ void DynamicArray::assign(int64_t new_size, int value){
 void DynamicArray::insert(int64_t index, const int value){
     if (index < 0 || index > size) {
         throw std::out_of_range("Index out of range");
-    } else {
-        push_back(0);
-        for (int64_t i = size - 1; i > index; --i) {
-            data[i] = data[i - 1];
-        }
-        data[index] = value;
     }
+    if (size + 1 > capacity) {
+        resize(size + 1); 
+    } else {
+        size++; 
+    }
+    for (int64_t i = size - 1; i > index; --i) {
+        data[i] = data[i - 1];
+    }
+    data[index] = value;
 }
-
 
 //меняем местами два массива
 void DynamicArray::swap(DynamicArray& other){

@@ -124,3 +124,52 @@ TEST_CASE("Empty check") {
     arr.push_back(10);
     CHECK(arr.empty() == false);
 }
+
+//вставка за пределы массива
+TEST_CASE("Insert out of bounds"){
+    DynamicArray arr = {1, 1, 1};
+    CHECK_THROWS_AS(arr.insert(5, 99), std::out_of_range);
+}
+
+//проверка, что capacity не уменьшается
+TEST_CASE("Resize to smaller size") {
+    DynamicArray arr;
+    arr.resize(10);
+    arr.resize(5);
+    CHECK(arr.Size() == 5);
+    CHECK(arr.Capacity() >= 10);
+}
+
+//при увеличении массива, новая выделенная память должна заполняться нулями
+TEST_CASE("Resize to larger size") {
+    DynamicArray arr;
+    arr.resize(10);
+    CHECK(arr.Size() == 10);
+    CHECK(arr.Capacity() >= 10);
+    for (int i = 0; i < 10; ++i) {
+        CHECK(arr[i] == 0);
+    }
+}
+
+TEST_CASE("Insert into empty array") {
+    DynamicArray arr;
+    arr.insert(0, 42);
+    CHECK(arr.Size() == 1);
+    CHECK(arr[0] == 42);
+}
+
+TEST_CASE("Resize -> Assign -> Insert") {
+    DynamicArray arr;
+    arr.resize(3); // [0, 0, 0]
+    CHECK(arr.Size() == 3);
+    arr.assign(5, 7); // [7, 7, 7, 7, 7]
+    CHECK(arr.Size() == 5);
+    arr.insert(2, 99); // [7, 7, 99, 7, 7, 7]
+    CHECK(arr.Size() == 6);
+    arr.resize(10); // [7, 7, 99, 7, 7, 7, 0, 0, 0, 0]
+    CHECK(arr.Size() == 10);
+    CHECK(arr[2] == 99);
+    CHECK(arr[6] == 0);
+}
+
+
