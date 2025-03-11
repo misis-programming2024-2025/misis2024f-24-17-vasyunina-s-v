@@ -1,0 +1,4 @@
+add_subdirectory(stack_arr_t)
+
+add_executable(stack_arr_t_test stack_arr_t_test.cpp)
+target_link_libraries(stack_arr_t_test PRIVATE stack_arr_t)
