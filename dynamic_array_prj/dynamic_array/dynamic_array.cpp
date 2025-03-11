@@ -91,14 +91,20 @@ void DynamicArray::erase(int64_t index){
 
 //изменение размера массива
 void DynamicArray::resize(int64_t new_size){
-    if (new_size > capacity){
+    if (new_size < 0) {
+        throw std::invalid_argument("Size cannot be negative.");
+    }
+    if (new_size > INT_MAX) {
+        throw std::length_error("Size is too large to allocate.");
+    }
+    if (new_size >= capacity){
         int* new_data = new int[new_size];
         capacity = new_size;
         std::copy(data, data + size, new_data);
         std::fill(new_data + size, new_data + new_size, 0);
         delete[] data;
         data = new_data;
-    }  else if (new_size < size) {
+    }  else if (new_size <= size) {
         std::fill(data + new_size, data + size, 0);
     }
     size = new_size;
@@ -107,7 +113,13 @@ void DynamicArray::resize(int64_t new_size){
 
 //меняется размер масиива и он заполняется value
 void DynamicArray::assign(int64_t new_size, int value){
-    if (new_size > capacity) {
+    if (new_size < 0) {
+        throw std::invalid_argument("Size cannot be negative.");
+    }
+    if (new_size > INT_MAX) {
+        throw std::length_error("Size is too large to allocate.");
+    }
+    if (new_size >= capacity) {
         int* new_data = new int[new_size]; 
         delete[] data;                     
         data = new_data;
