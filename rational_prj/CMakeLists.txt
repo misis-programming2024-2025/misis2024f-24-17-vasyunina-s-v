@@ -1,5 +1,0 @@
-add_subdirectory(rational)
-
-add_executable(rational_tests rational_tests.cpp)
-target_link_libraries(rational_tests rational)
-target_include_directories(rational_tests PUBLIC rational_prj)

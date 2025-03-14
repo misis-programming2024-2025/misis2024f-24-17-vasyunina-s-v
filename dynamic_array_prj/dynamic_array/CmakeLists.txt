@@ -1,5 +1,0 @@
-add_library(dynamic_array STATIC
-    dynamic_array.cpp
-    dynamic_array.hpp
-)
-target_include_directories(dynamic_array PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
