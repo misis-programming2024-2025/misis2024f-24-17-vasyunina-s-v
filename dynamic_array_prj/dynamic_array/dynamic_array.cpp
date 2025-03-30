@@ -94,9 +94,6 @@ void DynamicArray::resize(int64_t new_size){
     if (new_size < 0) {
         throw std::invalid_argument("Size cannot be negative.");
     }
-    if (new_size > INT_MAX) {
-        throw std::length_error("Size is too large to allocate.");
-    }
     if (new_size >= capacity){
         int* new_data = new int[new_size];
         capacity = new_size;
