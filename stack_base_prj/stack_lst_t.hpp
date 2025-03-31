@@ -1,7 +1,7 @@
 #include <iostream>
 #include <initializer_list>
 #include <stdexcept>
-
+#include <stack_base.hpp>
 
 template <typename T>
 class StackLstT {
@@ -36,3 +36,129 @@ private:
     Node* head_ = nullptr;  
 };
 
+
+template <typename T>
+StackLstT<T>::StackLstT() : head_(nullptr) {}
+
+template <typename T>
+StackLstT<T>::~StackLstT() {
+    while (head_ != nullptr){
+        Node* temp = head_;
+        head_ = head_->next;
+        delet temp;
+    }
+}
+
+template <typename T>
+StackLstT<T>::StackLstT(const StackLstT<T>& other) : head_(nullptr){
+    Node* tail = nullptr; //указатель на хвост новго списка
+    Node* current = other.head_; //указатель для обхода текущего списка
+    while (current != nullptr) {
+        Node* newNode = new Node(current->value);
+        if (tail == nullptr) {
+            head_ = newNode;
+        } else {
+            tail->next = newNode;
+        }
+        tail = newNode;  
+        current = current->next;
+    }
+}
+
+template <typename T>
+StackLstT<T>::StackLstT(StackLstT<T>&& other) : head_(other.head_) {
+    other.head_ = nullptr;
+}
+
+template <typename T>
+StackLstT<T>::StackLstT(const std::initializer_list<T>& list) : head_(nullptr){
+     for (auto it = list.begin(); it != list.end(); ++it) {
+        head_ = new Node(*it, head_);  
+    }
+}
+
+template <typename T>
+void StackLstT<T>::push(const T& value) {
+    head_ = new Node(value, head_);
+}
+
+template <typename T>
+void StackLstT<T>::pop(){
+    if (empty()) {
+        throw std::out_of_range("Stack is empty");
+    }
+    Node* temp = head_;
+    head_ = head_->next;
+    delete temp;
+}
+
+template <typename T>
+T& StackLstT<T>::top() const {
+    if (empty()) {
+        throw std::out_of_range("Stack is empty");
+    }
+    return head_->value;
+}
+
+template <typename T>
+void StackLstT<T>::swap(StackLstT<T>& other) {
+    std::swap(head_, other.head_);
+}
+
+template <typename T>
+void StackLstT<T>::merge(StackLstT<T>& other) {
+    if (head_ == nullptr) {
+        head_ = other.head_;
+    } else {
+        Node* tail = head_;
+        while (tail->next != nullptr) {
+            tail = tail->next;
+        }
+        tail->next = other.head_;
+    }
+    other.head_ = nullptr;
+}
+
+template <typename T>
+bool StackLstT<T>::empty() const {
+    return head_ == nullptr;
+}
+
+template <typename T>
+std::ptrdiff_t StackLstT<T>::size() const {
+    std::ptrdiff_t size = 0;
+    Node* current = head_;
+    while (current != nullptr) {
+        ++size;
+        current = current->next;
+    }
+    return size;
+}
+
+template <typename T>
+bool StackLstT<T>::operator==(const StackLstT<T>& rhs) const {
+    Node* current1 = head_;
+    Node* current2 = rhs.head_;
+    while (current1 != nullptr && current2 != nullptr) {
+        if (current1->value != current2->value) {
+            return false;
+        }
+        current1 = current1->next;
+        current2 = current2->next;
+    }
+    return current1 == nullptr && current2 == nullptr;
+}
+
+template <typename T>
+bool StackLstT<T>::operator!=(const StackLstT<T>& rhs) const {
+    return !(*this == rhs);
+}
+
+template <typename T>
+StackLstT<T>& StackLstT<T>::operator=(const StackLstT<T>& rhs) noexcept {
+    if (this != &rhs) {
+        StackLstT<T> temp(rhs);
+        swap(temp);
+    }
+    return *this;
+}

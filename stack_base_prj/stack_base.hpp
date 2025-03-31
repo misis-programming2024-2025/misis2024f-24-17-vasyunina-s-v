@@ -8,10 +8,9 @@ public:
     virtual void push(const T& value) = 0;
     virtual void pop() = 0;
     virtual T& top() const = 0;
-    virtual void swap(StackArrT<T>& other) = 0;
     virtual bool empty() const = 0;
     virtual void clear() = 0;
-    virtual void PrintToStream(std::ostream& os) const = 0;
+    virtual void printToStream(std::ostream& os) const = 0;
 };
 
 template <typename T>
