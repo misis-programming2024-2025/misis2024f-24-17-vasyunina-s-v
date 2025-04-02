@@ -1,10 +1,8 @@
-#ifndef TASKMANAGER_HPP
-#define TASKMANAGER_HPP
-
 #include "task/task.hpp"
 #include <vector>
 #include <string>
 #include <algorithm>
+#include <memory>
 
 /**
  * @brief Класс TaskManager управляет коллекцией задач.
@@ -134,6 +132,7 @@ public:
 
 private:
     std::vector<Task> tasks; ///< Вектор для хранения задач.
+    struct Impl;///< Вспомогательная структура для быстрого поиска
+    std::unique_ptr<Impl> pImpl;
+    std::vector<Task>::iterator findTask(const std::string& description);///< Быстрый поиск задач по описанию
 };
-
-#endif
