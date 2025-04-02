@@ -10,7 +10,7 @@ public:
     virtual T& top() const = 0;
     virtual bool empty() const = 0;
     virtual void clear() = 0;
-    virtual void printToStream(std::ostream& os) const = 0;
+    virtual void printToStream(std::ostream& os) const;
 };
 
 template <typename T>

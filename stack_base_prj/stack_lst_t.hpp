@@ -25,6 +25,7 @@ public:
 
     StackLstT<T>& operator=(const StackLstT<T>& rhs) noexcept;
     StackLstT<T>& operator=(StackLstT<T>&& other);
+    void PrintToStream(std::ostream& os) const override;
 
 private:
     struct Node {
@@ -180,4 +181,14 @@ StackLstT<T>& StackLstT<T>::operator=(StackLstT<T>&& other) {
         other.head_ = nullptr;
     }
     return *this;
+}
+
+
+template <typename T>
+void StackLstT<T>::PrintToStream(std::ostream& os) const {
+    Node* current = head_;
+        while (current != nullptr) {
+            os << current->data << " ";
+            current = current->next;
+        }
 }

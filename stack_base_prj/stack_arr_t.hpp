@@ -28,6 +28,7 @@ public:
 
 	StackArrT<T>& operator=(const StackArrT<T>& rhs) noexcept;
 	StackArrT<T>& operator=(StackArrT<T>&& other);
+    void PrintToStream(std::ostream& os) const override;
 private:
     std::ptrdiff_t size_ = 0;   //!< число элементов в буфере
     std::ptrdiff_t i_top_ = -1; //!< индекс top элемента
@@ -184,4 +185,10 @@ StackArrT<T>& StackArrT<T>::operator=(StackArrT<T>&& other) {
         return *this;
     }
 
-
+    
+template <typename T>
+void StackArrT<T>::PrintToStream(std::ostream& os) const {
+    for (auto it = data_.rbegin(); it != data_.rend(); ++it) {
+        os << *it << " ";
+    }
+}
