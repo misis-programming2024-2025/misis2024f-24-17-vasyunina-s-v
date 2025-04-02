@@ -1,7 +1,6 @@
 #include <iostream>
 #include <initializer_list>
 #include <stdexcept>
-#include <stack_base.hpp>
 
 template <typename T>
 class StackLstT {
@@ -45,7 +44,7 @@ StackLstT<T>::~StackLstT() {
     while (head_ != nullptr){
         Node* temp = head_;
         head_ = head_->next;
-        delet temp;
+        delete temp;
     }
 }
 
@@ -54,7 +53,7 @@ StackLstT<T>::StackLstT(const StackLstT<T>& other) : head_(nullptr){
     Node* tail = nullptr; //указатель на хвост новго списка
     Node* current = other.head_; //указатель для обхода текущего списка
     while (current != nullptr) {
-        Node* newNode = new Node(current->value);
+        Node* newNode = new Node{current->value};
         if (tail == nullptr) {
             head_ = newNode;
         } else {
@@ -73,13 +72,13 @@ StackLstT<T>::StackLstT(StackLstT<T>&& other) : head_(other.head_) {
 template <typename T>
 StackLstT<T>::StackLstT(const std::initializer_list<T>& list) : head_(nullptr){
      for (auto it = list.begin(); it != list.end(); ++it) {
-        head_ = new Node(*it, head_);  
+        head_ = new Node{*it, head_};  
     }
 }
 
 template <typename T>
 void StackLstT<T>::push(const T& value) {
-    head_ = new Node(value, head_);
+    head_ = new Node{value, head_};
 }
 
 template <typename T>
@@ -107,16 +106,22 @@ void StackLstT<T>::swap(StackLstT<T>& other) {
 
 template <typename T>
 void StackLstT<T>::merge(StackLstT<T>& other) {
-    if (head_ == nullptr) {
-        head_ = other.head_;
-    } else {
-        Node* tail = head_;
-        while (tail->next != nullptr) {
-            tail = tail->next;
-        }
-        tail->next = other.head_;
+    if (this == &other) {
+        return; // merge самого себя
     }
-    other.head_ = nullptr;
+
+    if (other.head_ == nullptr) {
+        return; // нечего мержить
+    }
+    StackLstT temp;
+    while (!other.empty()) {
+        temp.push(other.top());
+        other.pop();
+    }
+    while (!temp.empty()) {
+        this->push(temp.top());
+        temp.pop();
+    }
 }
 
 template <typename T>
@@ -159,6 +164,20 @@ StackLstT<T>& StackLstT<T>::operator=(const StackLstT<T>& rhs) noexcept {
     if (this != &rhs) {
         StackLstT<T> temp(rhs);
         swap(temp);
+    }
+    return *this;
+}
+
+template <typename T>
+StackLstT<T>& StackLstT<T>::operator=(StackLstT<T>&& other) {
+    if (this != &other) {
+        while (head_ != nullptr) {
+            Node* temp = head_;
+            head_ = head_->next;
+            delete temp;
+        }
+        head_ = other.head_;
+        other.head_ = nullptr;
     }
     return *this;
 }

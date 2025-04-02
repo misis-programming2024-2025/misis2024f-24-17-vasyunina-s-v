@@ -113,16 +113,15 @@ void StackLstT<T>::merge(StackLstT<T>& other) {
     if (other.head_ == nullptr) {
         return; // нечего мержить
     }
-    if (head_ == nullptr) {
-        head_ = other.head_;
-    } else {
-        Node* tail = head_;
-        while (tail->next != nullptr) {
-            tail = tail->next;
-        }
-        tail->next = other.head_;
+    StackLstT temp;
+    while (!other.empty()) {
+        temp.push(other.top());
+        other.pop();
     }
-    other.head_ = nullptr;
+    while (!temp.empty()) {
+        this->push(temp.top());
+        temp.pop();
+    }
 }
 
 template <typename T>
