@@ -1,0 +1,2 @@
+add_library(stack_base INTERFACE)
+target_include_directories(stack_base INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
