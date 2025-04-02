@@ -152,6 +152,10 @@
  }
  
  TEST_CASE("StackLstT - Edge Cases") {
+    SUBCASE("Pop on empty stack") {
+        StackLstT<int> stack;
+        CHECK_THROWS_AS(stack.pop(), std::out_of_range);
+    }
      SUBCASE("Large stack") {
          StackLstT<int> stack;
          for (int i = 0; i < 10000; ++i) {
@@ -166,4 +170,43 @@
          stack.push("test");
          CHECK(stack.top() == "test");
      }
+     SUBCASE("Top on empty stack") {
+        StackLstT<int> stack;
+        CHECK_THROWS_AS(stack.top(), std::out_of_range);
+    }
  }
+
+ TEST_CASE("Complex combinations") {
+    StackLstT<int> s;
+    
+    SUBCASE("Push -> Merge -> Pop -> Push") {
+        s.push(1);
+        s.push(2);
+        
+        StackLstT<int> s2;
+        s2.push(3);
+        s2.push(4);
+        
+        s.merge(s2);
+        CHECK(s.top() == 4);
+        s.pop();
+        CHECK(s.top() == 3);
+        s.push(5);
+        CHECK(s.top() == 5);
+    }
+    
+    SUBCASE("Copy -> Modify -> Merge") {
+        StackLstT<int> s1;
+        s1.push(10);
+        s1.push(20);
+        
+        StackLstT<int> s2(s1);
+        s2.push(30);
+        
+        s1.merge(s2);
+        CHECK(s1.top() == 30);
+        s1.pop();
+        CHECK(s1.top() == 20);
+    }
+}
+
