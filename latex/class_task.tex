@@ -1,0 +1,409 @@
+\doxysection{Task Class Reference}
+\hypertarget{class_task}{}\label{class_task}\index{Task@{Task}}
+
+
+Класс \doxylink{class_task}{Task} представляет задачу в менеджере задач.  
+
+
+
+
+{\ttfamily \#include $<$task.\+hpp$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_task_a8551cbe90975ea71bbe48184ee4eeede}{Task}} (const std\+::string \&\mbox{\hyperlink{class_task_a14f67f96a806a46958b47f04a0a7550d}{description}}, const std\+::string \&\mbox{\hyperlink{class_task_a3697fa70ce37bfa04d83238744fbf07d}{due\+Date}}="{}"{}, \mbox{\hyperlink{task_8hpp_a315655b1bb5848c063491adffde62b15}{Priority}} \mbox{\hyperlink{class_task_a2a3363320d81b8359c3250adac24acbb}{priority}}=\mbox{\hyperlink{task_8hpp_a315655b1bb5848c063491adffde62b15a87f8a6ab85c9ced3702b4ea641ad4bb5}{Priority\+::\+Medium}}, \mbox{\hyperlink{task_8hpp_a9ca8f05608edcbf85ab6c2c85a439ccb}{Category}} \mbox{\hyperlink{class_task_a7cc157190e650593feb87c22db1c4e45}{category}}=\mbox{\hyperlink{task_8hpp_a9ca8f05608edcbf85ab6c2c85a439ccba184daff620aca4ad23fd2bf70d0b76af}{Category\+::\+Personal}}, bool \mbox{\hyperlink{class_task_aea776103cd8853951c39512560d3d230}{completed}}=false)
+\begin{DoxyCompactList}\small\item\em Конструктор задачи. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_task_ad6d254620a609cf634ae0c46ee59148f}{mark\+Completed}} ()
+\begin{DoxyCompactList}\small\item\em Отмечает задачу как выполненную. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_task_aa8bf7f68390bc6dc572ea1cb9db7635c}{mark\+Pending}} ()
+\begin{DoxyCompactList}\small\item\em Отмечает задачу как невыполненную. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_task_abc502837932242450ea42c960e8c401b}{update\+Description}} (const std\+::string \&new\+Description)
+\begin{DoxyCompactList}\small\item\em Обновляет описание задачи. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_task_afbe33f94fde7ead1523e643c8b1e5eb9}{update\+Due\+Date}} (const std\+::string \&new\+Due\+Date)
+\begin{DoxyCompactList}\small\item\em Обновляет срок выполнения задачи. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_task_a56145639916dd40dff34e6e452e57393}{set\+Priority}} (\mbox{\hyperlink{task_8hpp_a315655b1bb5848c063491adffde62b15}{Priority}} new\+Priority)
+\begin{DoxyCompactList}\small\item\em Устанавливает приоритет задачи. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_task_a622a1d5de617cd6e2fec96dc162e1de4}{set\+Category}} (\mbox{\hyperlink{task_8hpp_a9ca8f05608edcbf85ab6c2c85a439ccb}{Category}} new\+Category)
+\begin{DoxyCompactList}\small\item\em Устанавливает категорию задачи. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_task_a8a74c990e2bd52f4ccceab481a0c4c22}{add\+Tag}} (const std\+::string \&tag)
+\begin{DoxyCompactList}\small\item\em Добавляет тег к задаче. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_task_a2799a23aa40b4de60b5325433e08dc73}{remove\+Tag}} (const std\+::string \&tag)
+\begin{DoxyCompactList}\small\item\em Удаляет тег из задачи. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_task_aecbe79dd5334c9969320695b5a82e32a}{get\+Description}} () const
+\begin{DoxyCompactList}\small\item\em Возвращает описание задачи. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_task_acec67768c5b96c344fbe6cb53a54477a}{get\+Due\+Date}} () const
+\begin{DoxyCompactList}\small\item\em Возвращает срок выполнения задачи. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{task_8hpp_a315655b1bb5848c063491adffde62b15}{Priority}} \mbox{\hyperlink{class_task_afccd9d3e33b47f2ed43325a3453907f6}{get\+Priority}} () const
+\begin{DoxyCompactList}\small\item\em Возвращает приоритет задачи. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{task_8hpp_a9ca8f05608edcbf85ab6c2c85a439ccb}{Category}} \mbox{\hyperlink{class_task_a5e528a4db6c9e81f256dd7f65e4a574b}{get\+Category}} () const
+\begin{DoxyCompactList}\small\item\em Возвращает категорию задачи. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_task_ad092b5e32ca30e6089f08bdb4e1ff658}{is\+Completed}} () const
+\begin{DoxyCompactList}\small\item\em Проверяет статус выполнения задачи. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_task_acdfdb5bf2c997c786e291974a741ee76}{get\+Tags}} () const
+\begin{DoxyCompactList}\small\item\em Возвращает список тегов задачи. \end{DoxyCompactList}\item 
+std\+::time\+\_\+t \mbox{\hyperlink{class_task_a5a686c472544998d5c4494159d7ddf85}{get\+Creation\+Time}} () const
+\begin{DoxyCompactList}\small\item\em Возвращает время создания задачи (в Unix-\/времени). \end{DoxyCompactList}\item 
+std\+::time\+\_\+t \mbox{\hyperlink{class_task_a741d56ccbe71bbb858e14d61b201192b}{get\+Completion\+Time}} () const
+\begin{DoxyCompactList}\small\item\em Возвращает время завершения задачи (если выполнена). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{class_task_a14f67f96a806a46958b47f04a0a7550d}{description}}
+\begin{DoxyCompactList}\small\item\em Текстовое описание задачи. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{class_task_a3697fa70ce37bfa04d83238744fbf07d}{due\+Date}}
+\begin{DoxyCompactList}\small\item\em Срок выполнения (формат\+: "{}\+YYYY-\/\+MM-\/\+DD"{}). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{task_8hpp_a315655b1bb5848c063491adffde62b15}{Priority}} \mbox{\hyperlink{class_task_a2a3363320d81b8359c3250adac24acbb}{priority}}
+\begin{DoxyCompactList}\small\item\em Приоритет задачи. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{task_8hpp_a9ca8f05608edcbf85ab6c2c85a439ccb}{Category}} \mbox{\hyperlink{class_task_a7cc157190e650593feb87c22db1c4e45}{category}}
+\begin{DoxyCompactList}\small\item\em Категория задачи. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_task_aea776103cd8853951c39512560d3d230}{completed}}
+\begin{DoxyCompactList}\small\item\em Статус выполнения. \end{DoxyCompactList}\item 
+std\+::time\+\_\+t \mbox{\hyperlink{class_task_aa554c3137d68d08a85053365571ece42}{creation\+Time}}
+\begin{DoxyCompactList}\small\item\em Время создания (Unix-\/время). \end{DoxyCompactList}\item 
+std\+::time\+\_\+t \mbox{\hyperlink{class_task_a3365472b90a0869368c1442c3b5052b3}{completion\+Time}}
+\begin{DoxyCompactList}\small\item\em Время завершения (0, если не завершена). \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{class_task_aa3438ceed31ad171e4d504589a7ef25a}{tags}}
+\begin{DoxyCompactList}\small\item\em Список тегов (например, "{}Проект"{}, "{}Срочно"{}). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Класс \doxylink{class_task}{Task} представляет задачу в менеджере задач. 
+
+Хранит описание, срок выполнения, приоритет, категорию, теги и статус выполнения. Позволяет управлять этими параметрами через методы класса. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_task_a8551cbe90975ea71bbe48184ee4eeede}\index{Task@{Task}!Task@{Task}}
+\index{Task@{Task}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{Task()}{Task()}}
+{\footnotesize\ttfamily \label{class_task_a8551cbe90975ea71bbe48184ee4eeede} 
+Task\+::\+Task (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{description}{, }\item[{const std\+::string \&}]{due\+Date}{ = {\ttfamily "{}"{}}, }\item[{\mbox{\hyperlink{task_8hpp_a315655b1bb5848c063491adffde62b15}{Priority}}}]{priority}{ = {\ttfamily \mbox{\hyperlink{task_8hpp_a315655b1bb5848c063491adffde62b15a87f8a6ab85c9ced3702b4ea641ad4bb5}{Priority\+::\+Medium}}}, }\item[{\mbox{\hyperlink{task_8hpp_a9ca8f05608edcbf85ab6c2c85a439ccb}{Category}}}]{category}{ = {\ttfamily \mbox{\hyperlink{task_8hpp_a9ca8f05608edcbf85ab6c2c85a439ccba184daff620aca4ad23fd2bf70d0b76af}{Category\+::\+Personal}}}, }\item[{bool}]{completed}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+Конструктор задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em description} & Описание задачи. \\
+\hline
+{\em due\+Date} & Срок выполнения (формат\+: "{}\+YYYY-\/\+MM-\/\+DD"{}). По умолчанию — пустая строка. \\
+\hline
+{\em priority} & Приоритет (Low/\+Medium/\+High). По умолчанию — Medium. \\
+\hline
+{\em category} & Категория (Study/\+Work/\+Personal). По умолчанию — Personal. \\
+\hline
+{\em completed} & Статус выполнения. По умолчанию — false. \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_task_a8a74c990e2bd52f4ccceab481a0c4c22}\index{Task@{Task}!addTag@{addTag}}
+\index{addTag@{addTag}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{addTag()}{addTag()}}
+{\footnotesize\ttfamily \label{class_task_a8a74c990e2bd52f4ccceab481a0c4c22} 
+void Task\+::add\+Tag (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{tag}{}\end{DoxyParamCaption})}
+
+
+
+Добавляет тег к задаче. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tag} & Тег (например, "{}Проект"{}, "{}Встреча"{}). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_task_a5e528a4db6c9e81f256dd7f65e4a574b}\index{Task@{Task}!getCategory@{getCategory}}
+\index{getCategory@{getCategory}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{getCategory()}{getCategory()}}
+{\footnotesize\ttfamily \label{class_task_a5e528a4db6c9e81f256dd7f65e4a574b} 
+\mbox{\hyperlink{task_8hpp_a9ca8f05608edcbf85ab6c2c85a439ccb}{Category}} Task\+::get\+Category (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Возвращает категорию задачи. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{task_8hpp_a9ca8f05608edcbf85ab6c2c85a439ccb}{Category} Текущая категория. 
+\end{DoxyReturn}
+\Hypertarget{class_task_a741d56ccbe71bbb858e14d61b201192b}\index{Task@{Task}!getCompletionTime@{getCompletionTime}}
+\index{getCompletionTime@{getCompletionTime}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{getCompletionTime()}{getCompletionTime()}}
+{\footnotesize\ttfamily \label{class_task_a741d56ccbe71bbb858e14d61b201192b} 
+std\+::time\+\_\+t Task\+::get\+Completion\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Возвращает время завершения задачи (если выполнена). 
+
+\begin{DoxyReturn}{Returns}
+std\+::time\+\_\+t Время в секундах или 0, если задача не завершена. 
+\end{DoxyReturn}
+\Hypertarget{class_task_a5a686c472544998d5c4494159d7ddf85}\index{Task@{Task}!getCreationTime@{getCreationTime}}
+\index{getCreationTime@{getCreationTime}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{getCreationTime()}{getCreationTime()}}
+{\footnotesize\ttfamily \label{class_task_a5a686c472544998d5c4494159d7ddf85} 
+std\+::time\+\_\+t Task\+::get\+Creation\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Возвращает время создания задачи (в Unix-\/времени). 
+
+\begin{DoxyReturn}{Returns}
+std\+::time\+\_\+t Время в секундах с 1970 года. 
+\end{DoxyReturn}
+\Hypertarget{class_task_aecbe79dd5334c9969320695b5a82e32a}\index{Task@{Task}!getDescription@{getDescription}}
+\index{getDescription@{getDescription}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{getDescription()}{getDescription()}}
+{\footnotesize\ttfamily \label{class_task_aecbe79dd5334c9969320695b5a82e32a} 
+std\+::string Task\+::get\+Description (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Возвращает описание задачи. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string Текущее описание. 
+\end{DoxyReturn}
+\Hypertarget{class_task_acec67768c5b96c344fbe6cb53a54477a}\index{Task@{Task}!getDueDate@{getDueDate}}
+\index{getDueDate@{getDueDate}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{getDueDate()}{getDueDate()}}
+{\footnotesize\ttfamily \label{class_task_acec67768c5b96c344fbe6cb53a54477a} 
+std\+::string Task\+::get\+Due\+Date (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Возвращает срок выполнения задачи. 
+
+\begin{DoxyReturn}{Returns}
+std\+::string Дата в формате "{}\+YYYY-\/\+MM-\/\+DD"{}. 
+\end{DoxyReturn}
+\Hypertarget{class_task_afccd9d3e33b47f2ed43325a3453907f6}\index{Task@{Task}!getPriority@{getPriority}}
+\index{getPriority@{getPriority}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{getPriority()}{getPriority()}}
+{\footnotesize\ttfamily \label{class_task_afccd9d3e33b47f2ed43325a3453907f6} 
+\mbox{\hyperlink{task_8hpp_a315655b1bb5848c063491adffde62b15}{Priority}} Task\+::get\+Priority (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Возвращает приоритет задачи. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{task_8hpp_a315655b1bb5848c063491adffde62b15}{Priority} Текущий приоритет. 
+\end{DoxyReturn}
+\Hypertarget{class_task_acdfdb5bf2c997c786e291974a741ee76}\index{Task@{Task}!getTags@{getTags}}
+\index{getTags@{getTags}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{getTags()}{getTags()}}
+{\footnotesize\ttfamily \label{class_task_acdfdb5bf2c997c786e291974a741ee76} 
+std\+::vector$<$ std\+::string $>$ Task\+::get\+Tags (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Возвращает список тегов задачи. 
+
+\begin{DoxyReturn}{Returns}
+std\+::vector$<$std\+::string$>$ Копия вектора тегов. 
+\end{DoxyReturn}
+\Hypertarget{class_task_ad092b5e32ca30e6089f08bdb4e1ff658}\index{Task@{Task}!isCompleted@{isCompleted}}
+\index{isCompleted@{isCompleted}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{isCompleted()}{isCompleted()}}
+{\footnotesize\ttfamily \label{class_task_ad092b5e32ca30e6089f08bdb4e1ff658} 
+bool Task\+::is\+Completed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Проверяет статус выполнения задачи. 
+
+\begin{DoxyReturn}{Returns}
+true Если задача выполнена. 
+\end{DoxyReturn}
+\Hypertarget{class_task_ad6d254620a609cf634ae0c46ee59148f}\index{Task@{Task}!markCompleted@{markCompleted}}
+\index{markCompleted@{markCompleted}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{markCompleted()}{markCompleted()}}
+{\footnotesize\ttfamily \label{class_task_ad6d254620a609cf634ae0c46ee59148f} 
+void Task\+::mark\+Completed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Отмечает задачу как выполненную. 
+
+\begin{DoxyNote}{Note}
+Автоматически устанавливает время завершения (текущее время). 
+\end{DoxyNote}
+\Hypertarget{class_task_aa8bf7f68390bc6dc572ea1cb9db7635c}\index{Task@{Task}!markPending@{markPending}}
+\index{markPending@{markPending}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{markPending()}{markPending()}}
+{\footnotesize\ttfamily \label{class_task_aa8bf7f68390bc6dc572ea1cb9db7635c} 
+void Task\+::mark\+Pending (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Отмечает задачу как невыполненную. 
+
+\begin{DoxyNote}{Note}
+Сбрасывает время завершения в 0. 
+\end{DoxyNote}
+\Hypertarget{class_task_a2799a23aa40b4de60b5325433e08dc73}\index{Task@{Task}!removeTag@{removeTag}}
+\index{removeTag@{removeTag}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{removeTag()}{removeTag()}}
+{\footnotesize\ttfamily \label{class_task_a2799a23aa40b4de60b5325433e08dc73} 
+void Task\+::remove\+Tag (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{tag}{}\end{DoxyParamCaption})}
+
+
+
+Удаляет тег из задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tag} & Тег для удаления. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_task_a622a1d5de617cd6e2fec96dc162e1de4}\index{Task@{Task}!setCategory@{setCategory}}
+\index{setCategory@{setCategory}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{setCategory()}{setCategory()}}
+{\footnotesize\ttfamily \label{class_task_a622a1d5de617cd6e2fec96dc162e1de4} 
+void Task\+::set\+Category (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{task_8hpp_a9ca8f05608edcbf85ab6c2c85a439ccb}{Category}}}]{new\+Category}{}\end{DoxyParamCaption})}
+
+
+
+Устанавливает категорию задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Category} & Новая категория (Study/\+Work/\+Personal). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_task_a56145639916dd40dff34e6e452e57393}\index{Task@{Task}!setPriority@{setPriority}}
+\index{setPriority@{setPriority}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{setPriority()}{setPriority()}}
+{\footnotesize\ttfamily \label{class_task_a56145639916dd40dff34e6e452e57393} 
+void Task\+::set\+Priority (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{task_8hpp_a315655b1bb5848c063491adffde62b15}{Priority}}}]{new\+Priority}{}\end{DoxyParamCaption})}
+
+
+
+Устанавливает приоритет задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Priority} & Новый приоритет (Low/\+Medium/\+High). \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_task_abc502837932242450ea42c960e8c401b}\index{Task@{Task}!updateDescription@{updateDescription}}
+\index{updateDescription@{updateDescription}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{updateDescription()}{updateDescription()}}
+{\footnotesize\ttfamily \label{class_task_abc502837932242450ea42c960e8c401b} 
+void Task\+::update\+Description (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{new\+Description}{}\end{DoxyParamCaption})}
+
+
+
+Обновляет описание задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Description} & Новое описание. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_task_afbe33f94fde7ead1523e643c8b1e5eb9}\index{Task@{Task}!updateDueDate@{updateDueDate}}
+\index{updateDueDate@{updateDueDate}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{updateDueDate()}{updateDueDate()}}
+{\footnotesize\ttfamily \label{class_task_afbe33f94fde7ead1523e643c8b1e5eb9} 
+void Task\+::update\+Due\+Date (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{new\+Due\+Date}{}\end{DoxyParamCaption})}
+
+
+
+Обновляет срок выполнения задачи. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Due\+Date} & Новая дата (формат\+: "{}\+YYYY-\/\+MM-\/\+DD"{}). \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_task_a7cc157190e650593feb87c22db1c4e45}\index{Task@{Task}!category@{category}}
+\index{category@{category}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{category}{category}}
+{\footnotesize\ttfamily \label{class_task_a7cc157190e650593feb87c22db1c4e45} 
+\mbox{\hyperlink{task_8hpp_a9ca8f05608edcbf85ab6c2c85a439ccb}{Category}} Task\+::category\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Категория задачи. 
+
+\Hypertarget{class_task_aea776103cd8853951c39512560d3d230}\index{Task@{Task}!completed@{completed}}
+\index{completed@{completed}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{completed}{completed}}
+{\footnotesize\ttfamily \label{class_task_aea776103cd8853951c39512560d3d230} 
+bool Task\+::completed\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Статус выполнения. 
+
+\Hypertarget{class_task_a3365472b90a0869368c1442c3b5052b3}\index{Task@{Task}!completionTime@{completionTime}}
+\index{completionTime@{completionTime}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{completionTime}{completionTime}}
+{\footnotesize\ttfamily \label{class_task_a3365472b90a0869368c1442c3b5052b3} 
+std\+::time\+\_\+t Task\+::completion\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Время завершения (0, если не завершена). 
+
+\Hypertarget{class_task_aa554c3137d68d08a85053365571ece42}\index{Task@{Task}!creationTime@{creationTime}}
+\index{creationTime@{creationTime}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{creationTime}{creationTime}}
+{\footnotesize\ttfamily \label{class_task_aa554c3137d68d08a85053365571ece42} 
+std\+::time\+\_\+t Task\+::creation\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Время создания (Unix-\/время). 
+
+\Hypertarget{class_task_a14f67f96a806a46958b47f04a0a7550d}\index{Task@{Task}!description@{description}}
+\index{description@{description}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{description}{description}}
+{\footnotesize\ttfamily \label{class_task_a14f67f96a806a46958b47f04a0a7550d} 
+std\+::string Task\+::description\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Текстовое описание задачи. 
+
+\Hypertarget{class_task_a3697fa70ce37bfa04d83238744fbf07d}\index{Task@{Task}!dueDate@{dueDate}}
+\index{dueDate@{dueDate}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{dueDate}{dueDate}}
+{\footnotesize\ttfamily \label{class_task_a3697fa70ce37bfa04d83238744fbf07d} 
+std\+::string Task\+::due\+Date\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Срок выполнения (формат\+: "{}\+YYYY-\/\+MM-\/\+DD"{}). 
+
+\Hypertarget{class_task_a2a3363320d81b8359c3250adac24acbb}\index{Task@{Task}!priority@{priority}}
+\index{priority@{priority}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{priority}{priority}}
+{\footnotesize\ttfamily \label{class_task_a2a3363320d81b8359c3250adac24acbb} 
+\mbox{\hyperlink{task_8hpp_a315655b1bb5848c063491adffde62b15}{Priority}} Task\+::priority\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Приоритет задачи. 
+
+\Hypertarget{class_task_aa3438ceed31ad171e4d504589a7ef25a}\index{Task@{Task}!tags@{tags}}
+\index{tags@{tags}!Task@{Task}}
+\doxysubsubsection{\texorpdfstring{tags}{tags}}
+{\footnotesize\ttfamily \label{class_task_aa3438ceed31ad171e4d504589a7ef25a} 
+std\+::vector$<$std\+::string$>$ Task\+::tags\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Список тегов (например, "{}Проект"{}, "{}Срочно"{}). 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+final\+\_\+project/include/task/\mbox{\hyperlink{task_8hpp}{task.\+hpp}}\end{DoxyCompactItemize}
