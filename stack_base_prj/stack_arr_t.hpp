@@ -5,7 +5,7 @@
 
 
 template <typename T>
-class StackArrT {
+class StackArrT: public IStackBase {
 public:
 	StackArrT();
 	~StackArrT();

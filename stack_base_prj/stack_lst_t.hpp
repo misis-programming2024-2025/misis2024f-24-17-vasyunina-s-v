@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 template <typename T>
-class StackLstT {
+class StackLstT: public IStackBase {
 public:
     StackLstT();
     ~StackLstT();

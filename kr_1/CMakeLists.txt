@@ -1,0 +1,1 @@
+add_executable(math_vector_tests math_vector_tests.cpp)
