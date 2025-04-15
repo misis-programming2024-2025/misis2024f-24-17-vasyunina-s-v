@@ -1,0 +1,4 @@
+add_subdirectory(hash_table)
+
+add_executable(hash_table_tests hash_table_tests.cpp)
+target_link_libraries(hash_table_tests PRIVATE hash_table)
