@@ -117,17 +117,76 @@ ValueType& HashTable<KeyType, ValueType>::operator[](const KeyType& key) {
     return newNode->value;
 }
 
+
+
 template<typename KeyType, typename ValueType>
-typename HashTable<KeyType, ValueType>::Iterator HashTable<KeyType, ValueType>::begin() {
-    for (size_t i = 0; i < table.size(); ++i) {
-        if (table[i]) {
-            return Iterator(i, table[i], table);
+HashTable<KeyType, ValueType>::Iterator::Iterator(
+    size_t i, 
+    typename HashTable<KeyType, ValueType>::Node* node,
+    const std::vector<typename HashTable<KeyType, ValueType>::Node*>& tbl
+) : index(i), current(node), table(tbl) {}
+
+
+template<typename KeyType, typename ValueType>
+typename HashTable<KeyType, ValueType>::Iterator& 
+HashTable<KeyType, ValueType>::Iterator::operator++() {
+    if (current) {
+        current = current->next;  // Переход к следующему узлу в текущей корзине
+        if (!current) {
+            // Поиск следующей непустой корзины
+            for (++index; index < table.size() && !table[index]; ++index) {}
+            current = (index < table.size()) ? table[index] : nullptr;
         }
+    }
+    return *this;
+}
+
+
+template<typename KeyType, typename ValueType>
+typename HashTable<KeyType, ValueType>::Iterator 
+HashTable<KeyType, ValueType>::Iterator::operator++(int) {
+    Iterator tmp = *this;
+    ++(*this);
+    return tmp;
+}
+
+
+template<typename KeyType, typename ValueType>
+bool HashTable<KeyType, ValueType>::Iterator::operator!=(const Iterator& other) const {
+    return index != other.index || current != other.current;
+}
+
+
+template<typename KeyType, typename ValueType>
+bool HashTable<KeyType, ValueType>::Iterator::operator==(const Iterator& other) const {
+    return !(*this != other);
+}
+
+
+template<typename KeyType, typename ValueType>
+std::pair<const KeyType&, ValueType&> HashTable<KeyType, ValueType>::Iterator::operator*() const {
+    return {current->key, current->value};
+}
+
+
+template<typename KeyType, typename ValueType>
+std::pair<const KeyType&, ValueType&>* HashTable<KeyType, ValueType>::Iterator::operator->() const {
+    return &(operator*());
+}
+
+
+template<typename KeyType, typename ValueType>
+typename HashTable<KeyType, ValueType>::Iterator 
+HashTable<KeyType, ValueType>::begin() const {
+    for (size_t i = 0; i < table.size(); ++i) {
+        if (table[i]) return Iterator(i, table[i], table);
     }
     return end();
 }
 
+
 template<typename KeyType, typename ValueType>
-typename HashTable<KeyType, ValueType>::Iterator::end() {
-    return Iterator(table.size(), nullptr, table)
-};
+typename HashTable<KeyType, ValueType>::Iterator 
+HashTable<KeyType, ValueType>::end() const {
+    return Iterator(table.size(), nullptr, table);
+}
