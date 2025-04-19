@@ -1,4 +1,7 @@
 #include <iostream>
+#include <vector>
+#include <functional>
+#include <utility>
 
 
 template<typename KeyType, typename ValueType>
@@ -21,7 +24,7 @@ public:
 
     void insert(const KeyType& key, const ValueType& value);
     bool contains(const KeyType& key) const;
-    ValueType& operator[](const KeyType& key)
+    ValueType& operator[](const KeyType& key);
 
     class Iterator {
     private:
@@ -34,14 +37,11 @@ public:
         Iterator& operator++();
         bool operator!=(const Iterator& other) const;
         std::pair<const KeyType&, ValueType&> operator*() const;
-
+    };
 
     Iterator begin() const;
     Iterator end() const;
-
-    };
 };
-
 
 
 template<typename KeyType, typename ValueType>
@@ -141,49 +141,26 @@ HashTable<KeyType, ValueType>::Iterator::operator++() {
     return *this;
 }
 
-
-template<typename KeyType, typename ValueType>
-typename HashTable<KeyType, ValueType>::Iterator 
-HashTable<KeyType, ValueType>::Iterator::operator++(int) {
-    Iterator tmp = *this;
-    ++(*this);
-    return tmp;
-}
-
-
 template<typename KeyType, typename ValueType>
 bool HashTable<KeyType, ValueType>::Iterator::operator!=(const Iterator& other) const {
     return index != other.index || current != other.current;
 }
-
-
-template<typename KeyType, typename ValueType>
-bool HashTable<KeyType, ValueType>::Iterator::operator==(const Iterator& other) const {
-    return !(*this != other);
-}
-
 
 template<typename KeyType, typename ValueType>
 std::pair<const KeyType&, ValueType&> HashTable<KeyType, ValueType>::Iterator::operator*() const {
     return {current->key, current->value};
 }
 
-
-template<typename KeyType, typename ValueType>
-std::pair<const KeyType&, ValueType&>* HashTable<KeyType, ValueType>::Iterator::operator->() const {
-    return &(operator*());
-}
-
-
 template<typename KeyType, typename ValueType>
 typename HashTable<KeyType, ValueType>::Iterator 
 HashTable<KeyType, ValueType>::begin() const {
     for (size_t i = 0; i < table.size(); ++i) {
-        if (table[i]) return Iterator(i, table[i], table);
+        if (table[i] != nullptr) {
+            return Iterator(i, table[i], table);
+        }
     }
     return end();
 }
-
 
 template<typename KeyType, typename ValueType>
 typename HashTable<KeyType, ValueType>::Iterator 
