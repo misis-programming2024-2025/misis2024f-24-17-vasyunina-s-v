@@ -1,0 +1,195 @@
+#include "mainwindow.hpp"
+#include <QMessageBox>
+#include <QSettings>
+#include <QCloseEvent>
+
+MainWindow::MainWindow(QWidget *parent)
+    : QMainWindow(parent),
+      taskManager_(),
+      database_("tasks.db"),
+      taskList_(new QListWidget(this)),
+      mainToolBar_(new QToolBar("Меню", this)),
+      statusBar_(new QStatusBar(this)) 
+{
+    // Инициализация UI
+    setupUI();
+    setupMenuBar();
+
+    setupToolBar();
+    setupConnections();
+    
+    // Загрузка данных
+    database_.load(taskManager_);
+    refreshTaskList();
+    
+    // Восстановление настроек
+    loadSettings();
+}
+
+void MainWindow::setupUI() {
+    // Основные настройки окна
+    setWindowTitle("Task Manager");
+    setMinimumSize(800, 600);
+    
+    // Центральный виджет
+    QWidget *centralWidget = new QWidget(this);
+    QVBoxLayout *mainLayout = new QVBoxLayout(centralWidget);
+    
+    // Список задач
+    taskList_->setSelectionMode(QAbstractItemView::SingleSelection);
+    mainLayout->addWidget(taskList_);
+    
+    // Фильтры
+    filterCombo_ = new QComboBox(this);
+    filterCombo_->addItems({"Все задачи", "Приоритетные", "Выполненные", "В процессе"});
+    mainLayout->addWidget(filterCombo_);
+    
+    setCentralWidget(centralWidget);
+    setStatusBar(statusBar_);
+}
+
+void MainWindow::setupMenuBar() {
+    QMenu *fileMenu = menuBar()->addMenu("Файл");
+    
+    addAction_ = fileMenu->addAction("Добавить задачу");
+    editAction_ = fileMenu->addAction("Редактировать");
+    deleteAction_ = fileMenu->addAction("Удалить");
+    fileMenu->addSeparator();
+    
+    QAction *exitAction = fileMenu->addAction("Выйти");
+    connect(exitAction, &QAction::triggered, this, &QMainWindow::close);
+}
+
+void MainWindow::setupToolBar() {
+    addAction_->setIcon(QIcon(":/icons/add.svg"));
+    editAction_->setIcon(QIcon(":/icons/edit.svg"));
+    deleteAction_->setIcon(QIcon(":/icons/delete.svg"));
+    
+    mainToolBar_->addAction(addAction_);
+    mainToolBar_->addAction(editAction_);
+    mainToolBar_->addAction(deleteAction_);
+    mainToolBar_->addWidget(filterCombo_);
+    
+    addToolBar(Qt::TopToolBarArea, mainToolBar_);
+}
+
+void MainWindow::setupConnections() {
+    // Кнопки
+    connect(addAction_, &QAction::triggered, this, &MainWindow::onAddTask);
+    connect(editAction_, &QAction::triggered, this, &MainWindow::onEditTask);
+    connect(deleteAction_, &QAction::triggered, this, &MainWindow::onDeleteTask);
+    
+    // Фильтрация
+    connect(filterCombo_, QOverload<int>::of(&QComboBox::currentIndexChanged),
+            this, &MainWindow::onFilterTasks);
+    
+    // Двойной клик
+    connect(taskList_, &QListWidget::itemDoubleClicked, 
+            [this](){ onEditTask(); });
+}
+
+void MainWindow::refreshTaskList() {
+    taskList_->clear();
+    
+    for (const auto& task : taskManager_.getTasks()) {
+        QListWidgetItem *item = new QListWidgetItem();
+        TaskWidget *widget = new TaskWidget(task);
+        
+        connect(widget, &TaskWidget::editRequested,
+                this, &MainWindow::onEditTask);
+        connect(widget, &TaskWidget::statusChanged,
+                this, &MainWindow::onTaskStatusChanged);
+        
+        taskList_->addItem(item);
+        taskList_->setItemWidget(item, widget);
+        item->setSizeHint(widget->sizeHint());
+    }
+    
+    statusBar_->showMessage(QString("Задача: %1").arg(taskList_->count()));
+}
+
+// Реализация слотов
+void MainWindow::onAddTask() {
+    TaskDialog dialog(this);
+    if (dialog.exec() == QDialog::Accepted) {
+        Task newTask = dialog.getTask();
+        taskManager_.addTask(newTask);
+        refreshTaskList();
+        database_.save(taskManager_);
+    }
+}
+
+void MainWindow::onEditTask() {
+    if (auto task = getSelectedTask()) {
+        TaskDialog dialog(*task, this);
+        if (dialog.exec() == QDialog::Accepted) {
+            *task = dialog.getTask();
+            refreshTaskList();
+            database_.save(taskManager_);
+        }
+    }
+}
+
+void MainWindow::onDeleteTask() {
+    if (auto task = getSelectedTask()) {
+        QMessageBox::StandardButton reply;
+        reply = QMessageBox::question(this, "Удалить задачу", 
+                                    "Вы уверены?",
+                                    QMessageBox::Yes|QMessageBox::No);
+        
+        if (reply == QMessageBox::Yes) {
+            taskManager_.removeTask(task->getDescription());
+            refreshTaskList();
+            database_.save(taskManager_);
+        }
+    }
+}
+
+void MainWindow::onTaskStatusChanged(const std::string& desc, bool completed) {
+    if (completed) {
+        taskManager_.markTaskCompleted(desc);
+    } else {
+        // Реализовать markTaskPending в TaskManager
+    }
+    database_.save(taskManager_);
+}
+
+void MainWindow::onFilterTasks(int filterType) {
+    // Реализация фильтрации
+    std::vector<Task> filtered;
+    
+    switch(filterType) {
+        case 0: filtered = taskManager_.getTasks(); break;
+        case 1: filtered = taskManager_.getTasksByPriority(Priority::High); break;
+        case 2: filtered = taskManager_.getCompletedTasks(); break;
+        case 3: filtered = taskManager_.getPendingTasks(); break;
+    }
+    
+    // Обновить список с учетом фильтра
+}
+
+// Вспомогательные методы
+Task* MainWindow::getSelectedTask() const {
+    if (auto item = taskList_->currentItem()) {
+        return static_cast<TaskWidget*>(taskList_->itemWidget(item))->getTask();
+    }
+    return nullptr;
+}
+
+void MainWindow::loadSettings() {
+    QSettings settings;
+    restoreGeometry(settings.value("geometry").toByteArray());
+    restoreState(settings.value("windowState").toByteArray());
+}
+
+void MainWindow::saveSettings() {
+    QSettings settings;
+    settings.setValue("geometry", saveGeometry());
+    settings.setValue("windowState", saveState());
+}
+
+void MainWindow::closeEvent(QCloseEvent *event) {
+    saveSettings();
+    database_.save(taskManager_);
+    event->accept();
+}
