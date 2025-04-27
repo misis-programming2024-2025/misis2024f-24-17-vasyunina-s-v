@@ -3,7 +3,7 @@
 #include <stdexcept>
 
 template <typename T>
-class StackLstT: public IStackBase {
+class StackLstT: public IStackBase<T> {
 public:
     StackLstT();
     ~StackLstT();
@@ -19,13 +19,19 @@ public:
   
     bool empty() const;
     std::ptrdiff_t size() const;
+    void clear();
 
     bool operator==(const StackLstT<T>& rhs) const;
     bool operator!=(const StackLstT<T>& rhs) const;
 
     StackLstT<T>& operator=(const StackLstT<T>& rhs) noexcept;
     StackLstT<T>& operator=(StackLstT<T>&& other);
-    void PrintToStream(std::ostream& os) const override;
+    std::ostream& printToStream(std::ostream& os) const override;
+
+    void swap(IStackBase<T>& other) override;
+    void merge(IStackBase<T>& other) override;
+    bool operator==(const IStackBase<T>& rhs) const override;
+    bool operator!=(const IStackBase<T>& rhs) const override;
 
 private:
     struct Node {
@@ -114,15 +120,18 @@ void StackLstT<T>::merge(StackLstT<T>& other) {
     if (other.head_ == nullptr) {
         return; // нечего мержить
     }
-    StackLstT temp;
-    while (!other.empty()) {
-        temp.push(other.top());
-        other.pop();
+    Node* last = head_;
+    if (last != nullptr) {
+        while (last->next != nullptr) {
+                last = last->next;
+        }
+            // Присоединяем другой стек
+        last->next = other.head_;
+    } else {
+            // Если текущий стек пуст, просто берем другой стек
+        head_ = other.head_;
     }
-    while (!temp.empty()) {
-        this->push(temp.top());
-        temp.pop();
-    }
+    other.head_ = nullptr;
 }
 
 template <typename T>
@@ -171,24 +180,81 @@ StackLstT<T>& StackLstT<T>::operator=(const StackLstT<T>& rhs) noexcept {
 
 template <typename T>
 StackLstT<T>& StackLstT<T>::operator=(StackLstT<T>&& other) {
-    if (this != &other) {
-        while (head_ != nullptr) {
-            Node* temp = head_;
-            head_ = head_->next;
-            delete temp;
-        }
-        head_ = other.head_;
-        other.head_ = nullptr;
+    if (size() != other.size()) return false;
+    
+    Node* curr1 = head_;
+    Node* curr2 = other.head_;
+    while (curr1 != nullptr && curr2 != nullptr) {
+        if (curr1->value != curr2->value) return false;
+        curr1 = curr1->next;
+        curr2 = curr2->next;
     }
-    return *this;
+    return true;
 }
 
 
 template <typename T>
-void StackLstT<T>::PrintToStream(std::ostream& os) const {
+std::ostream& StackLstT<T>::printToStream(std::ostream& os) const {
     Node* current = head_;
-        while (current != nullptr) {
-            os << current->data << " ";
+        while (current) {
+            os << current->value << " ";
             current = current->next;
         }
+        return os;
+}
+
+template <typename T>
+void StackLstT<T>::clear() {
+    while (!empty()) {
+        pop();
+    }
+}
+
+template <typename T>
+void StackLstT<T>::swap(IStackBase<T>& other) {
+    auto* derived = dynamic_cast<StackLstT<T>*>(&other);
+    if (derived) {
+        std::swap(head_, derived->head_);
+    }
+}
+
+template <typename T>
+void StackLstT<T>::merge(IStackBase<T>& other) {
+    auto* derived = dynamic_cast<StackLstT<T>*>(&other);
+    if (!derived || this == &other) return;
+    
+    if (derived->head_ == nullptr) return;
+    
+    if (head_ == nullptr) {
+        head_ = derived->head_;
+    } else {
+        Node* last = head_;
+        while (last->next != nullptr) {
+            last = last->next;
+        }
+        last->next = derived->head_;
+    }
+    derived->head_ = nullptr;
+}
+
+template <typename T>
+bool StackLstT<T>::operator==(const IStackBase<T>& rhs) const {
+    const auto* derived = dynamic_cast<const StackLstT<T>*>(&rhs);
+    if (!derived) return false;
+    
+    Node* current1 = head_;
+    Node* current2 = derived->head_;
+    while (current1 != nullptr && current2 != nullptr) {
+        if (current1->value != current2->value) {
+            return false;
+        }
+        current1 = current1->next;
+        current2 = current2->next;
+    }
+    return current1 == nullptr && current2 == nullptr;
+}
+
+template <typename T>
+bool StackLstT<T>::operator!=(const IStackBase<T>& rhs) const {
+    return !(*this == rhs);
 }

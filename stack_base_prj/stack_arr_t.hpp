@@ -5,7 +5,7 @@
 
 
 template <typename T>
-class StackArrT: public IStackBase {
+class StackArrT: public IStackBase<T> {
 public:
 	StackArrT();
 	~StackArrT();
@@ -22,13 +22,19 @@ public:
 
 	bool empty() const;
 	std::ptrdiff_t size() const;
+    void clear();
 
 	bool operator==(const StackArrT<T>& rhs) const;
 	bool operator!=(const StackArrT<T>& rhs) const;
 
 	StackArrT<T>& operator=(const StackArrT<T>& rhs) noexcept;
 	StackArrT<T>& operator=(StackArrT<T>&& other);
-    void PrintToStream(std::ostream& os) const override;
+    std::ostream& printToStream(std::ostream& os) const override;
+
+    void swap(IStackBase<T>& other) override;
+    void merge(IStackBase<T>& other) override;
+    bool operator==(const IStackBase<T>& rhs) const override;
+    bool operator!=(const IStackBase<T>& rhs) const override;
 private:
     std::ptrdiff_t size_ = 0;   //!< число элементов в буфере
     std::ptrdiff_t i_top_ = -1; //!< индекс top элемента
@@ -114,18 +120,23 @@ void StackArrT<T>::swap(StackArrT<T>& other) {
 
 template <typename T>
 void StackArrT<T>::merge(StackArrT<T>& other) {
-        T* new_data = new T[size_ + other.size_];
-        std::copy(data_, data_ + size_, new_data);
-        std::copy(other.data_, other.data_ + other.size_, new_data + size_);
-        delete[] data_;
-        data_ = new_data;
-        size_ += other.size_;
-        i_top_ = size_ - 1;
-        other.size_ = 0;
-        other.i_top_ = -1;
-        delete[] other.data_;
-        other.data_ = nullptr;
-    }
+    if (this == &other) return;
+    if (other.empty()) return;
+    
+    std::ptrdiff_t new_size = size_ + other.size_;
+    T* new_data = new T[new_size];
+    
+    std::copy(data_, data_ + size_, new_data);
+
+    std::copy(other.data_, other.data_ + other.size_, new_data + size_);
+    
+    delete[] data_;
+    data_ = new_data;
+    size_ = new_size;
+    i_top_ = size_ - 1;
+    
+    other.clear();
+}
 
 template <typename T>
 bool StackArrT<T>::empty() const {
@@ -187,8 +198,65 @@ StackArrT<T>& StackArrT<T>::operator=(StackArrT<T>&& other) {
 
     
 template <typename T>
-void StackArrT<T>::PrintToStream(std::ostream& os) const {
-    for (auto it = data_.rbegin(); it != data_.rend(); ++it) {
-        os << *it << " ";
+std::ostream& StackArrT<T>::printToStream(std::ostream& os) const {
+    for (std::ptrdiff_t i = 0; i <= i_top_; ++i) {
+        os << data_[i] << " ";
+      }
+      return os;
+}
+
+template <typename T>
+void StackArrT<T>::clear() {
+    delete[] data_;
+    data_ = nullptr;
+    size_ = 0;
+    i_top_ = -1;
+}
+
+template <typename T>
+void StackArrT<T>::swap(IStackBase<T>& other) {
+    auto* derived = dynamic_cast<StackArrT<T>*>(&other);
+    if (derived) {
+        std::swap(size_, derived->size_);
+        std::swap(i_top_, derived->i_top_);
+        std::swap(data_, derived->data_);
     }
+}
+
+template <typename T>
+void StackArrT<T>::merge(IStackBase<T>& other) {
+    auto* derived = dynamic_cast<StackArrT<T>*>(&other);
+    if (!derived) return;
+    
+    T* new_data = new T[size_ + derived->size_];
+    std::copy(data_, data_ + size_, new_data);
+    std::copy(derived->data_, derived->data_ + derived->size_, new_data + size_);
+    
+    delete[] data_;
+    data_ = new_data;
+    size_ += derived->size_;
+    i_top_ = size_ - 1;
+    
+    derived->size_ = 0;
+    derived->i_top_ = -1;
+    delete[] derived->data_;
+    derived->data_ = nullptr;
+}
+
+template <typename T>
+bool StackArrT<T>::operator==(const IStackBase<T>& rhs) const {
+    const auto* derived = dynamic_cast<const StackArrT<T>*>(&rhs);
+    if (!derived || size_ != derived->size_) return false;
+    
+    for (std::ptrdiff_t i = 0; i <= i_top_; ++i) {
+        if (data_[i] != derived->data_[i]) {
+            return false;
+        }
+    }
+    return true;
+}
+
+template <typename T>
+bool StackArrT<T>::operator!=(const IStackBase<T>& rhs) const {
+    return !(*this == rhs);
 }

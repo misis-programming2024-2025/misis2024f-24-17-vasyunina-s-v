@@ -1,2 +1,6 @@
 add_library(stack_base INTERFACE)
 target_include_directories(stack_base INTERFACE ${CMAKE_CURRENT_SOURCE_DIR})
+
+add_executable(stack_base_tests stack_base_tests.cpp)
+target_link_libraries(stack_base_tests stack_base)
+target_include_directories(stack_base_tests PUBLIC stack_base_prj)
