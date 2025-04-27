@@ -61,10 +61,6 @@ HashTable<KeyType, ValueType>::~HashTable() {
 
 template<typename KeyType, typename ValueType>
 void HashTable<KeyType, ValueType>::insert(const KeyType& key, const ValueType& value) {
-    if (table.empty()) {
-        throw std::out_of_range("HashTable is empty");
-    }
-    
     size_t index = hash_function(key) % table.size();
     Node* current = table[index];
     
@@ -97,10 +93,6 @@ bool HashTable<KeyType, ValueType>::contains(const KeyType& key) const {
 
 template<typename KeyType, typename ValueType>
 ValueType& HashTable<KeyType, ValueType>::operator[](const KeyType& key) {
-    if (table.empty()) {
-        throw std::out_of_range("HashTable is empty");
-    }
-    
     size_t index = hash_function(key) % table.size();
     Node* current = table[index];
     
