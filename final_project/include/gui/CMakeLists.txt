@@ -1,33 +1,42 @@
-# Настройка GUI модуля
-qt_add_executable(TaskManagerGUI
-    mainwindow/MainWindow.cpp
-    widgets/TaskWidget.cpp
-    dialogs/TaskDialog.cpp
-    resources/resources.qrc  # Файл ресурсов
+# gui/CMakeLists.txt
+cmake_minimum_required(VERSION 3.5)
+
+project(GUI LANGUAGES CXX)
+
+# Настройка автоматической обработки Qt
+set(CMAKE_AUTOMOC ON)
+set(CMAKE_AUTOUIC ON)
+set(CMAKE_AUTORCC ON)
+
+# 1. Собираем список исходников
+file(GLOB GUI_SOURCES
+    "*.cpp"
+    "*.hpp"
+    "mainwindow/*.cpp"
+    "mainwindow/*.hpp"
+    "widgets/*.cpp"
+    "widgets/*.hpp"
 )
 
-target_link_libraries(TaskManagerGUI PRIVATE
-    Qt5::Widgets
-    Qt5::Svg
-    TaskManager
+# 2. Ресурсы (убедитесь что файл существует)
+set(RESOURCE_FILES 
+    "resources.qrc"
 )
 
-# Создание файла ресурсов
-qt_add_resources(RESOURCES_PREFIX "/"
-    RESOURCES
-    resources/icons/add.svg
-    resources/icons/edit.svg
-    resources/styles/main.qss
+# 3. Создаем библиотеку
+add_library(GUILib STATIC
+    ${GUI_SOURCES}
+    ${RESOURCE_FILES}
 )
 
-qt_add_resources(GUI_RESOURCES "resources.qrc")
-target_sources(TaskManagerGUI PRIVATE ${GUI_RESOURCES})
-
-# Подключение модулей Qt
+# 4. Подключаем зависимости
 find_package(Qt5 REQUIRED COMPONENTS Widgets Svg)
 
-# Подключение заголовочных файлов
-target_include_directories(TaskManagerGUI PRIVATE
+target_link_libraries(GUILib PRIVATE
+    Qt5::Widgets
+    Qt5::Svg
+)
+
+target_include_directories(GUILib PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}
-    ${CMAKE_CURRENT_SOURCE_DIR}/../include
 )

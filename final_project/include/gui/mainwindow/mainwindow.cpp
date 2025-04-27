@@ -11,6 +11,9 @@ MainWindow::MainWindow(QWidget *parent)
       mainToolBar_(new QToolBar("Меню", this)),
       statusBar_(new QStatusBar(this)) 
 {
+    // Загрузка стилей перед инициализацией UI
+    loadStyleSheet();
+    
     // Инициализация UI
     setupUI();
     setupMenuBar();
@@ -192,4 +195,17 @@ void MainWindow::closeEvent(QCloseEvent *event) {
     saveSettings();
     database_.save(taskManager_);
     event->accept();
+}
+
+void MainWindow::loadStyleSheet() {
+    QFile styleFile(":/styles/main.qss");
+    if (styleFile.open(QFile::ReadOnly | QFile::Text)) {
+        QString styleSheet = QLatin1String(styleFile.readAll());
+        qApp->setStyleSheet(styleSheet); // Применяем ко всему приложению
+        styleFile.close();
+    } else {
+        qWarning() << "Не удалось загрузить файл стилей:" << styleFile.errorString();
+        // Можно установить стиль по умолчанию
+        qApp->setStyleSheet("QWidget { font-size: 12pt; }");
+    }
 }

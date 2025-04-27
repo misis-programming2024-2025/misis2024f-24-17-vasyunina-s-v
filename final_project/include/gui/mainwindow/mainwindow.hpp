@@ -87,6 +87,9 @@
      // Вспомогательные методы
      void showErrorMessage(const QString& message);
      Task* getSelectedTask() const;
+
+     // Загрузка стилей
+     void loadStyleSheet();
  
      // Данные
      TaskManager taskManager_;
