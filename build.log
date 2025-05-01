@@ -1,0 +1,170 @@
+Change Dir: '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+
+Run Build Command(s): /usr/bin/cmake -E env VERBOSE=1 /usr/bin/gmake -f Makefile
+/usr/bin/cmake -S/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1 -B/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build --check-build-system CMakeFiles/Makefile.cmake 0
+/usr/bin/cmake -E cmake_progress_start /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/CMakeFiles /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build//CMakeFiles/progress.marks
+/usr/bin/gmake  -f CMakeFiles/Makefile2 all
+gmake[1]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+/usr/bin/gmake  -f final_project/include/database/CMakeFiles/DatabaseLib_autogen_timestamp_deps.dir/build.make final_project/include/database/CMakeFiles/DatabaseLib_autogen_timestamp_deps.dir/depend
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1 /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/database /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/database /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/database/CMakeFiles/DatabaseLib_autogen_timestamp_deps.dir/DependInfo.cmake "--color="
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+/usr/bin/gmake  -f final_project/include/database/CMakeFiles/DatabaseLib_autogen_timestamp_deps.dir/build.make final_project/include/database/CMakeFiles/DatabaseLib_autogen_timestamp_deps.dir/build
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+gmake[2]: Nothing to be done for 'final_project/include/database/CMakeFiles/DatabaseLib_autogen_timestamp_deps.dir/build'.
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[  0%] Built target DatabaseLib_autogen_timestamp_deps
+/usr/bin/gmake  -f final_project/include/database/CMakeFiles/DatabaseLib_autogen.dir/build.make final_project/include/database/CMakeFiles/DatabaseLib_autogen.dir/depend
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1 /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/database /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/database /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/database/CMakeFiles/DatabaseLib_autogen.dir/DependInfo.cmake "--color="
+Dependencies file "final_project/include/database/DatabaseLib_autogen/deps" is newer than depends file "/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/database/CMakeFiles/DatabaseLib_autogen.dir/compiler_depend.internal".
+Consolidate compiler generated dependencies of target DatabaseLib_autogen
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+/usr/bin/gmake  -f final_project/include/database/CMakeFiles/DatabaseLib_autogen.dir/build.make final_project/include/database/CMakeFiles/DatabaseLib_autogen.dir/build
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+gmake[2]: Nothing to be done for 'final_project/include/database/CMakeFiles/DatabaseLib_autogen.dir/build'.
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[  3%] Built target DatabaseLib_autogen
+/usr/bin/gmake  -f final_project/include/database/CMakeFiles/DatabaseLib.dir/build.make final_project/include/database/CMakeFiles/DatabaseLib.dir/depend
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1 /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/database /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/database /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/database/CMakeFiles/DatabaseLib.dir/DependInfo.cmake "--color="
+Dependencies file "final_project/include/database/CMakeFiles/DatabaseLib.dir/DatabaseLib_autogen/mocs_compilation.cpp.o.d" is newer than depends file "/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/database/CMakeFiles/DatabaseLib.dir/compiler_depend.internal".
+Dependencies file "final_project/include/database/CMakeFiles/DatabaseLib.dir/database.cpp.o.d" is newer than depends file "/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/database/CMakeFiles/DatabaseLib.dir/compiler_depend.internal".
+Consolidate compiler generated dependencies of target DatabaseLib
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+/usr/bin/gmake  -f final_project/include/database/CMakeFiles/DatabaseLib.dir/build.make final_project/include/database/CMakeFiles/DatabaseLib.dir/build
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+gmake[2]: Nothing to be done for 'final_project/include/database/CMakeFiles/DatabaseLib.dir/build'.
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[ 17%] Built target DatabaseLib
+/usr/bin/gmake  -f final_project/include/task/CMakeFiles/TaskLib_autogen_timestamp_deps.dir/build.make final_project/include/task/CMakeFiles/TaskLib_autogen_timestamp_deps.dir/depend
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1 /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/task /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/task /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/task/CMakeFiles/TaskLib_autogen_timestamp_deps.dir/DependInfo.cmake "--color="
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+/usr/bin/gmake  -f final_project/include/task/CMakeFiles/TaskLib_autogen_timestamp_deps.dir/build.make final_project/include/task/CMakeFiles/TaskLib_autogen_timestamp_deps.dir/build
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+gmake[2]: Nothing to be done for 'final_project/include/task/CMakeFiles/TaskLib_autogen_timestamp_deps.dir/build'.
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[ 17%] Built target TaskLib_autogen_timestamp_deps
+/usr/bin/gmake  -f final_project/include/task/CMakeFiles/TaskLib_autogen.dir/build.make final_project/include/task/CMakeFiles/TaskLib_autogen.dir/depend
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1 /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/task /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/task /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/task/CMakeFiles/TaskLib_autogen.dir/DependInfo.cmake "--color="
+Dependencies file "final_project/include/task/TaskLib_autogen/deps" is newer than depends file "/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/task/CMakeFiles/TaskLib_autogen.dir/compiler_depend.internal".
+Consolidate compiler generated dependencies of target TaskLib_autogen
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+/usr/bin/gmake  -f final_project/include/task/CMakeFiles/TaskLib_autogen.dir/build.make final_project/include/task/CMakeFiles/TaskLib_autogen.dir/build
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+gmake[2]: Nothing to be done for 'final_project/include/task/CMakeFiles/TaskLib_autogen.dir/build'.
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[ 21%] Built target TaskLib_autogen
+/usr/bin/gmake  -f final_project/include/task/CMakeFiles/TaskLib.dir/build.make final_project/include/task/CMakeFiles/TaskLib.dir/depend
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1 /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/task /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/task /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/task/CMakeFiles/TaskLib.dir/DependInfo.cmake "--color="
+Dependencies file "final_project/include/task/CMakeFiles/TaskLib.dir/TaskLib_autogen/mocs_compilation.cpp.o.d" is newer than depends file "/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/task/CMakeFiles/TaskLib.dir/compiler_depend.internal".
+Dependencies file "final_project/include/task/CMakeFiles/TaskLib.dir/task.cpp.o.d" is newer than depends file "/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/task/CMakeFiles/TaskLib.dir/compiler_depend.internal".
+Consolidate compiler generated dependencies of target TaskLib
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+/usr/bin/gmake  -f final_project/include/task/CMakeFiles/TaskLib.dir/build.make final_project/include/task/CMakeFiles/TaskLib.dir/build
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+gmake[2]: Nothing to be done for 'final_project/include/task/CMakeFiles/TaskLib.dir/build'.
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[ 35%] Built target TaskLib
+/usr/bin/gmake  -f final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen_timestamp_deps.dir/build.make final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen_timestamp_deps.dir/depend
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1 /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/taskmanager /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen_timestamp_deps.dir/DependInfo.cmake "--color="
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+/usr/bin/gmake  -f final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen_timestamp_deps.dir/build.make final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen_timestamp_deps.dir/build
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+gmake[2]: Nothing to be done for 'final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen_timestamp_deps.dir/build'.
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[ 35%] Built target TaskManagerLib_autogen_timestamp_deps
+/usr/bin/gmake  -f final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen.dir/build.make final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen.dir/depend
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1 /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/taskmanager /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen.dir/DependInfo.cmake "--color="
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+/usr/bin/gmake  -f final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen.dir/build.make final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen.dir/build
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[ 39%] Automatic MOC and UIC for target TaskManagerLib
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager && /usr/bin/cmake -E cmake_autogen /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen.dir/AutogenInfo.json Debug
+AutoGen: Refreshing parse cache because it doesn't exist.
+AutoMoc: Generating "SRC:/build/final_project/include/taskmanager/TaskManagerLib_autogen/moc_predefs.h", because it doesn't exist.
+/usr/bin/g++ -std=gnu++17 -dM -E -c /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/doctest -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/taskmanager -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/task -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/database -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include
+AutoGen: Parsing "SRC:/final_project/include/taskmanager/taskmanager.hpp"
+AutoGen: Parsing "SRC:/final_project/include/taskmanager/taskmanager.cpp"
+AutoMoc: Generating MOC compilation "SRC:/build/final_project/include/taskmanager/TaskManagerLib_autogen/mocs_compilation.cpp"
+AutoMoc: Merging MOC dependencies into "SRC:/build/final_project/include/taskmanager/TaskManagerLib_autogen/deps"
+AutoGen: Writing the parse cache file "SRC:/build/final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen.dir/ParseCache.txt"
+AutoGen: Writing the settings file "SRC:/build/final_project/include/taskmanager/CMakeFiles/TaskManagerLib_autogen.dir/AutogenUsed.txt"
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager && /usr/bin/cmake -E touch /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager/TaskManagerLib_autogen/timestamp
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[ 39%] Built target TaskManagerLib_autogen
+/usr/bin/gmake  -f final_project/include/taskmanager/CMakeFiles/TaskManagerLib.dir/build.make final_project/include/taskmanager/CMakeFiles/TaskManagerLib.dir/depend
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1 /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/taskmanager /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager/CMakeFiles/TaskManagerLib.dir/DependInfo.cmake "--color="
+Dependencies file "final_project/include/taskmanager/TaskManagerLib_autogen/deps" is newer than depends file "/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager/CMakeFiles/TaskManagerLib.dir/compiler_depend.internal".
+Consolidate compiler generated dependencies of target TaskManagerLib
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+/usr/bin/gmake  -f final_project/include/taskmanager/CMakeFiles/TaskManagerLib.dir/build.make final_project/include/taskmanager/CMakeFiles/TaskManagerLib.dir/build
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[ 42%] Building CXX object final_project/include/taskmanager/CMakeFiles/TaskManagerLib.dir/TaskManagerLib_autogen/mocs_compilation.cpp.o
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager && /usr/bin/g++  -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager/TaskManagerLib_autogen/include -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/doctest -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/taskmanager -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/task -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/database -g -std=gnu++17 -MD -MT final_project/include/taskmanager/CMakeFiles/TaskManagerLib.dir/TaskManagerLib_autogen/mocs_compilation.cpp.o -MF CMakeFiles/TaskManagerLib.dir/TaskManagerLib_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/TaskManagerLib.dir/TaskManagerLib_autogen/mocs_compilation.cpp.o -c /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager/TaskManagerLib_autogen/mocs_compilation.cpp
+[ 46%] Building CXX object final_project/include/taskmanager/CMakeFiles/TaskManagerLib.dir/taskmanager.cpp.o
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager && /usr/bin/g++  -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager/TaskManagerLib_autogen/include -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/doctest -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/taskmanager -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/task -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/database -g -std=gnu++17 -MD -MT final_project/include/taskmanager/CMakeFiles/TaskManagerLib.dir/taskmanager.cpp.o -MF CMakeFiles/TaskManagerLib.dir/taskmanager.cpp.o.d -o CMakeFiles/TaskManagerLib.dir/taskmanager.cpp.o -c /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/taskmanager/taskmanager.cpp
+[ 50%] Linking CXX static library libTaskManagerLib.a
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager && /usr/bin/cmake -P CMakeFiles/TaskManagerLib.dir/cmake_clean_target.cmake
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/include/taskmanager && /usr/bin/cmake -E cmake_link_script CMakeFiles/TaskManagerLib.dir/link.txt --verbose=1
+/usr/bin/ar qc libTaskManagerLib.a CMakeFiles/TaskManagerLib.dir/TaskManagerLib_autogen/mocs_compilation.cpp.o CMakeFiles/TaskManagerLib.dir/taskmanager.cpp.o
+/usr/bin/ranlib libTaskManagerLib.a
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[ 53%] Built target TaskManagerLib
+/usr/bin/gmake  -f final_project/CMakeFiles/TaskManager_autogen_timestamp_deps.dir/build.make final_project/CMakeFiles/TaskManager_autogen_timestamp_deps.dir/depend
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1 /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/CMakeFiles/TaskManager_autogen_timestamp_deps.dir/DependInfo.cmake "--color="
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+/usr/bin/gmake  -f final_project/CMakeFiles/TaskManager_autogen_timestamp_deps.dir/build.make final_project/CMakeFiles/TaskManager_autogen_timestamp_deps.dir/build
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+gmake[2]: Nothing to be done for 'final_project/CMakeFiles/TaskManager_autogen_timestamp_deps.dir/build'.
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[ 53%] Built target TaskManager_autogen_timestamp_deps
+/usr/bin/gmake  -f final_project/CMakeFiles/TaskManager_autogen.dir/build.make final_project/CMakeFiles/TaskManager_autogen.dir/depend
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1 /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/CMakeFiles/TaskManager_autogen.dir/DependInfo.cmake "--color="
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+/usr/bin/gmake  -f final_project/CMakeFiles/TaskManager_autogen.dir/build.make final_project/CMakeFiles/TaskManager_autogen.dir/build
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[ 57%] Automatic MOC and UIC for target TaskManager
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project && /usr/bin/cmake -E cmake_autogen /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/CMakeFiles/TaskManager_autogen.dir/AutogenInfo.json Debug
+AutoGen: Refreshing parse cache because it doesn't exist.
+AutoMoc: Generating "SRC:/build/final_project/TaskManager_autogen/moc_predefs.h", because it doesn't exist.
+/usr/bin/g++ -std=gnu++17 -dM -E -c /usr/share/cmake-3.28/Modules/CMakeCXXCompilerABI.cpp -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/doctest -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/database -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/task -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/taskmanager -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtSvg -I/usr/include/c++/11 -I/usr/include/x86_64-linux-gnu/c++/11 -I/usr/include/c++/11/backward -I/usr/lib/gcc/x86_64-linux-gnu/11/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include
+AutoGen: Parsing "SRC:/final_project/include/main.cpp"
+AutoMoc: Generating MOC compilation "SRC:/build/final_project/TaskManager_autogen/mocs_compilation.cpp"
+AutoMoc: Merging MOC dependencies into "SRC:/build/final_project/TaskManager_autogen/deps"
+AutoGen: Writing the parse cache file "SRC:/build/final_project/CMakeFiles/TaskManager_autogen.dir/ParseCache.txt"
+AutoGen: Writing the settings file "SRC:/build/final_project/CMakeFiles/TaskManager_autogen.dir/AutogenUsed.txt"
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project && /usr/bin/cmake -E touch /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/TaskManager_autogen/timestamp
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[ 57%] Built target TaskManager_autogen
+/usr/bin/gmake  -f final_project/CMakeFiles/TaskManager.dir/build.make final_project/CMakeFiles/TaskManager.dir/depend
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build && /usr/bin/cmake -E cmake_depends "Unix Makefiles" /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1 /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/CMakeFiles/TaskManager.dir/DependInfo.cmake "--color="
+Dependencies file "final_project/TaskManager_autogen/deps" is newer than depends file "/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/CMakeFiles/TaskManager.dir/compiler_depend.internal".
+Consolidate compiler generated dependencies of target TaskManager
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+/usr/bin/gmake  -f final_project/CMakeFiles/TaskManager.dir/build.make final_project/CMakeFiles/TaskManager.dir/build
+gmake[2]: Entering directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+[ 60%] Building CXX object final_project/CMakeFiles/TaskManager.dir/TaskManager_autogen/mocs_compilation.cpp.o
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project && /usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/TaskManager_autogen/include -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/doctest -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/database -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/task -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/taskmanager -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtSvg -g -std=gnu++17 -fPIC -MD -MT final_project/CMakeFiles/TaskManager.dir/TaskManager_autogen/mocs_compilation.cpp.o -MF CMakeFiles/TaskManager.dir/TaskManager_autogen/mocs_compilation.cpp.o.d -o CMakeFiles/TaskManager.dir/TaskManager_autogen/mocs_compilation.cpp.o -c /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/TaskManager_autogen/mocs_compilation.cpp
+[ 64%] Building CXX object final_project/CMakeFiles/TaskManager.dir/include/main.cpp.o
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project && /usr/bin/g++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_SVG_LIB -DQT_WIDGETS_LIB -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project/TaskManager_autogen/include -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/doctest -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/database -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/task -I/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/taskmanager -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtSvg -g -std=gnu++17 -fPIC -MD -MT final_project/CMakeFiles/TaskManager.dir/include/main.cpp.o -MF CMakeFiles/TaskManager.dir/include/main.cpp.o.d -o CMakeFiles/TaskManager.dir/include/main.cpp.o -c /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/final_project/include/main.cpp
+[ 67%] Linking CXX executable TaskManager
+cd /home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build/final_project && /usr/bin/cmake -E cmake_link_script CMakeFiles/TaskManager.dir/link.txt --verbose=1
+/usr/bin/g++ -g CMakeFiles/TaskManager.dir/TaskManager_autogen/mocs_compilation.cpp.o CMakeFiles/TaskManager.dir/include/main.cpp.o -o TaskManager  -lGuiLib include/database/libDatabaseLib.a include/task/libTaskLib.a include/taskmanager/libTaskManagerLib.a /usr/lib/x86_64-linux-gnu/libQt5Svg.so.5.15.13 include/database/libDatabaseLib.a /usr/lib/x86_64-linux-gnu/libsqlite3.so include/task/libTaskLib.a /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.13 /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.13 /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.13 
+/usr/bin/ld: cannot find -lGuiLib: No such file or directory
+collect2: error: ld returned 1 exit status
+gmake[2]: *** [final_project/CMakeFiles/TaskManager.dir/build.make:130: final_project/TaskManager] Error 1
+gmake[2]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+gmake[1]: *** [CMakeFiles/Makefile2:183: final_project/CMakeFiles/TaskManager.dir/all] Error 2
+gmake[1]: Leaving directory '/home/sofia/Desktop/misis2024f-24-17-vasyunina-s-v-1/build'
+gmake: *** [Makefile:91: all] Error 2
+

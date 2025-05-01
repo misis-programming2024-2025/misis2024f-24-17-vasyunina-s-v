@@ -1,3 +1,7 @@
+#ifndef TASKMANAGER_HPP
+#define TASKMANAGER_HPP
+
+
 #include "task/task.hpp"
 #include <vector>
 #include <string>
@@ -13,9 +17,10 @@
 class TaskManager {
 public:
     /**
-     * @brief Конструктор по умолчанию.
+     * @brief Конструктор
      */
-    TaskManager() = default;
+    TaskManager();
+    ~TaskManager();
 
     // === Методы для управления задачами ===
     /**
@@ -136,3 +141,4 @@ private:
     std::unique_ptr<Impl> pImpl;
     std::vector<Task>::iterator findTask(const std::string& description);///< Быстрый поиск задач по описанию
 };
+#endif 

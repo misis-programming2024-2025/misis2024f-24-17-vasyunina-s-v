@@ -1,7 +1,7 @@
 # Менеджер задач
 add_library(TaskManagerLib STATIC
-    TaskManager.cpp
-    TaskManager.hpp
+    taskmanager.cpp
+    taskmanager.hpp
 )
 
 target_link_libraries(TaskManagerLib PRIVATE 

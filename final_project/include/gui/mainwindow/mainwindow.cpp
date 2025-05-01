@@ -123,12 +123,11 @@ void MainWindow::onAddTask() {
 }
 
 void MainWindow::onEditTask() {
-    if (auto task = getSelectedTask()) {
+    if (auto task = const_cast<Task*>(getSelectedTask())) {
         TaskDialog dialog(*task, this);
         if (dialog.exec() == QDialog::Accepted) {
-            *task = dialog.getTask();
-            refreshTaskList();
-            database_.save(taskManager_);
+            *task = dialog.getTask(); 
+            refreshTaskList() ;
         }
     }
 }
@@ -158,7 +157,6 @@ void MainWindow::onTaskStatusChanged(const std::string& desc, bool completed) {
 }
 
 void MainWindow::onFilterTasks(int filterType) {
-    // Реализация фильтрации
     std::vector<Task> filtered;
     
     switch(filterType) {
@@ -167,16 +165,13 @@ void MainWindow::onFilterTasks(int filterType) {
         case 2: filtered = taskManager_.getCompletedTasks(); break;
         case 3: filtered = taskManager_.getPendingTasks(); break;
     }
-    
-    // Обновить список с учетом фильтра
 }
 
-// Вспомогательные методы
-Task* MainWindow::getSelectedTask() const {
+const Task* MainWindow::getSelectedTask() const {
     if (auto item = taskList_->currentItem()) {
-        return static_cast<TaskWidget*>(taskList_->itemWidget(item))->getTask();
+        return &static_cast<TaskWidget*>(taskList_->itemWidget(item))->getTask();
     }
-    return nullptr;
+    return nullptr; 
 }
 
 void MainWindow::loadSettings() {

@@ -1,3 +1,6 @@
+#ifndef TASK_HPP
+#define TASK_HPP
+
 #include <string>
 #include <vector>
 #include <chrono>
@@ -37,6 +40,7 @@ public:
      * @param category Категория (Study/Work/Personal). По умолчанию — Personal.
      * @param completed Статус выполнения. По умолчанию — false.
      */
+    Task() = default;
     Task(const std::string& description, const std::string& dueDate = "", 
          Priority priority = Priority::Medium, Category category = Category::Personal, 
          bool completed = false);
@@ -150,3 +154,4 @@ private:
     std::time_t completionTime;   ///< Время завершения (0, если не завершена).
     std::vector<std::string> tags; ///< Список тегов (например, "Проект", "Срочно").
 };
+#endif

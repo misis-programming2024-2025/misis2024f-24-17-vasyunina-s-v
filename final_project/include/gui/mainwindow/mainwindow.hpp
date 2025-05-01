@@ -10,9 +10,15 @@
  #include <QToolBar>
  #include <QStatusBar>
  #include <QAction>
- #include "../taskmanager/taskmanager.hpp"
- #include "widgets/taskwidget.hpp"
- #include "dialogs/taskdialog.hpp"
+ #include <QComboBox>       
+#include <QMenu>           
+#include <QMenuBar>        
+#include <QApplication>    
+#include <QDebug> 
+ #include "taskmanager/taskmanager.hpp"
+  #include "../database/database.hpp"
+ #include "../widgets/taskwidgets.hpp"
+ #include "../dialogs/taskdialog.hpp"
  
  /**
   * @class MainWindow
@@ -86,7 +92,7 @@
  
      // Вспомогательные методы
      void showErrorMessage(const QString& message);
-     Task* getSelectedTask() const;
+     const Task*  getSelectedTask() const;
 
      // Загрузка стилей
      void loadStyleSheet();

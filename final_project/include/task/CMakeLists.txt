@@ -1,7 +1,7 @@
 # Модель задачи
 add_library(TaskLib STATIC
-    Task.cpp
-    Task.hpp
+    task.cpp
+    task.hpp
 )
 
 target_include_directories(TaskLib PUBLIC 

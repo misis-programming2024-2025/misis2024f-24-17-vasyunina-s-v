@@ -5,8 +5,8 @@
 
  #pragma once
 
- #include "task.hpp"
- #include "taskmanager.hpp"
+ #include "task/task.hpp"
+ #include "taskmanager/taskmanager.hpp"
  #include <QString>
  #include <sqlite3.h>
  #include <vector>

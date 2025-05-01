@@ -9,7 +9,7 @@
  #include <QLabel>
  #include <QPushButton>
  #include <QHBoxLayout>
- #include "../task/task.hpp"
+ #include "task/task.hpp"
  
  /**
   * @class TaskWidget
