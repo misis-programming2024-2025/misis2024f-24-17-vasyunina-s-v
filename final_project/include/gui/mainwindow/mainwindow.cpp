@@ -11,25 +11,58 @@ MainWindow::MainWindow(QWidget *parent)
       mainToolBar_(new QToolBar("Меню", this)),
       statusBar_(new QStatusBar(this)) 
 {
+    qDebug() << "=== Инициализация MainWindow ===";
+    
+    // Логирование базовых виджетов
+    qDebug() << "Основные виджеты созданы:";
+    qDebug() << " - taskList_:" << taskList_;
+    qDebug() << " - mainToolBar_:" << mainToolBar_;
+    qDebug() << " - statusBar_:" << statusBar_;
+
     // Загрузка стилей перед инициализацией UI
+    qDebug() << "Загрузка стилей...";
     loadStyleSheet();
     
     // Инициализация UI
+    qDebug() << "Настройка UI...";
     setupUI();
     setupMenuBar();
 
+    qDebug() << "Настройка ToolBar...";
     setupToolBar();
+    
+    qDebug() << "Настройка соединений...";
     setupConnections();
     
     // Загрузка данных
+    qDebug() << "Загрузка данных из БД...";
     database_.load(taskManager_);
+    
+    qDebug() << "Обновление списка задач...";
     refreshTaskList();
     
     // Восстановление настроек
+    qDebug() << "Загрузка настроек...";
     loadSettings();
+
+    // Дополнительная проверка виджетов после полной инициализации
+    qDebug() << "\n=== Проверка виджетов после инициализации ===";
+    qDebug() << "Все QListWidget:" << findChildren<QListWidget*>();
+    qDebug() << "Все QToolBar:" << findChildren<QToolBar*>();
+    qDebug() << "Все QPushButton:" << findChildren<QPushButton*>();
+    qDebug() << "Все QAction:" << findChildren<QAction*>();
+
+    qDebug() << "=== Инициализация завершена ===";
 }
 
 void MainWindow::setupUI() {
+    qDebug() << "Настройка интерфейса...";
+
+    if (!centralWidget()) {
+        qDebug() << "Создание центрального виджета";
+        setCentralWidget(new QWidget(this));
+    }
+
     // Основные настройки окна
     setWindowTitle("Менеджер задач");
     setMinimumSize(800, 600);

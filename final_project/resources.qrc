@@ -6,6 +6,6 @@
     <file alias="app_icon.svg">include/gui/resources/icons/app_icon.svg</file>
   </qresource>
   <qresource prefix="/styles">
-    <file>include/gui/resources/styles/main.qss</file>
+    <file alias="main.qss">include/gui/resources/styles/main.qss</file>
 </qresource>
 </RCC>
