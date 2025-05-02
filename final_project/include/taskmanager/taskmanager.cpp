@@ -38,7 +38,7 @@ void TaskManager::updateTaskDescription(const std::string& oldDesc,
     auto it = findTask(oldDesc);
     if (it != tasks.end()) {
         pImpl->descriptionToIndex.erase(oldDesc);
-        it->updateDescription(newDesc);
+        it->setDescription(newDesc);
         pImpl->descriptionToIndex[newDesc] = std::distance(tasks.begin(), it);
     }
 }
@@ -147,4 +147,13 @@ std::vector<Task>::iterator TaskManager::findTask(const std::string& description
     }
     return std::find_if(tasks.begin(), tasks.end(),
         [&description](const Task& t) { return t.getDescription() == description; });
+}
+
+void TaskManager::markTaskPending(const std::string& title) {
+    auto it = std::find_if(tasks.begin(), tasks.end(),
+        [&title](const Task& task) { return task.getTitle() == title; });
+    
+    if (it != tasks.end()) {
+        it->markPending();
+    }
 }

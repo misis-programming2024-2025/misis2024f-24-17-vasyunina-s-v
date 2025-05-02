@@ -121,6 +121,6 @@ TaskWidget:hover {
 
 /* Стиль для выполненных задач */
 .completed {
-    color: #888;
+    color: #62bb27;
     text-decoration: line-through;
 }

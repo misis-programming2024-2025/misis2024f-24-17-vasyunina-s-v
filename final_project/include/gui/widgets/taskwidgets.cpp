@@ -7,6 +7,12 @@ TaskWidget::TaskWidget(const Task& task, QWidget *parent)
     : QWidget(parent), task_(task) {
     setupUI();
     updateStyle();
+    QLabel *titleLabel = new QLabel(QString::fromStdString(task.getTitle()));
+    titleLabel->setStyleSheet("font-weight: bold; font-size: 14px;");
+    
+    QVBoxLayout *layout = new QVBoxLayout;
+    layout->addWidget(titleLabel);
+    setLayout(layout);
 }
 
 void TaskWidget::updateTask(const Task& task) {
@@ -19,7 +25,7 @@ const Task& TaskWidget::getTask() const {
 }
 
 void TaskWidget::mouseDoubleClickEvent(QMouseEvent *event) {
-    Q_EMIT editRequested(task_.getDescription());
+    Q_EMIT editRequested(task_.getTitle());
     QWidget::mouseDoubleClickEvent(event);
 }
 
@@ -30,9 +36,10 @@ void TaskWidget::setupUI() {
     mainLayout_->setSpacing(10);
 
     // Виджеты для отображения данных
-    descriptionLabel_ = new QLabel(QString::fromStdString(task_.getDescription()), this);
-    descriptionLabel_->setWordWrap(true);
-    descriptionLabel_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    titleLabel_ = new QLabel(QString::fromStdString(task_.getTitle()), this); 
+    titleLabel_->setWordWrap(true);
+    titleLabel_->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    titleLabel_->setStyleSheet("font-weight: bold;");
 
     priorityLabel_ = new QLabel(this);
     priorityLabel_->setFixedWidth(20);
@@ -52,18 +59,18 @@ void TaskWidget::setupUI() {
 
     // Добавление виджетов в layout
     mainLayout_->addWidget(priorityLabel_);
-    mainLayout_->addWidget(descriptionLabel_, 1);
+    mainLayout_->addWidget(titleLabel_, 1);  
     mainLayout_->addWidget(datesLabel_);
     mainLayout_->addWidget(statusButton_);
     mainLayout_->addWidget(editButton_);
 
     // Соединение сигналов
     connect(statusButton_, &QPushButton::clicked, [this](bool checked) {
-        Q_EMIT statusChanged(task_.getDescription(), checked);
+        Q_EMIT statusChanged(task_.getTitle(), checked);  
     });
 
     connect(editButton_, &QPushButton::clicked, [this]() {
-        Q_EMIT editRequested(task_.getDescription());
+        Q_EMIT editRequested(task_.getTitle());  
     });
 }
 

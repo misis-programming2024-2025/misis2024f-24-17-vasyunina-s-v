@@ -41,6 +41,7 @@ public:
      * @param description Описание задачи.
      */
     void markTaskCompleted(const std::string& description);
+    void markTaskPending(const std::string& title);
     
     /**
      * @brief Обновляет описание задачи.

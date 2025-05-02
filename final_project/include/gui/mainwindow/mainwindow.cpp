@@ -31,7 +31,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 void MainWindow::setupUI() {
     // Основные настройки окна
-    setWindowTitle("Task Manager");
+    setWindowTitle("Менеджер задач");
     setMinimumSize(800, 600);
     
     // Центральный виджет
@@ -64,9 +64,9 @@ void MainWindow::setupMenuBar() {
 }
 
 void MainWindow::setupToolBar() {
-    addAction_->setIcon(QIcon(":/icons/add.svg"));
-    editAction_->setIcon(QIcon(":/icons/edit.svg"));
-    deleteAction_->setIcon(QIcon(":/icons/delete.svg"));
+    addAction_->setIcon(QIcon("resources/icons/add.svg"));
+    editAction_->setIcon(QIcon("resources//icons/edit.svg"));
+    deleteAction_->setIcon(QIcon("resources//icons/delete.svg"));
     
     mainToolBar_->addAction(addAction_);
     mainToolBar_->addAction(editAction_);
@@ -96,19 +96,20 @@ void MainWindow::refreshTaskList() {
     
     for (const auto& task : taskManager_.getTasks()) {
         QListWidgetItem *item = new QListWidgetItem();
+        item->setFlags(item->flags() & ~Qt::ItemIsSelectable); 
+        
         TaskWidget *widget = new TaskWidget(task);
         
-        connect(widget, &TaskWidget::editRequested,
-                this, &MainWindow::onEditTask);
-        connect(widget, &TaskWidget::statusChanged,
-                this, &MainWindow::onTaskStatusChanged);
+        connect(widget, &TaskWidget::editRequested, this, &MainWindow::onEditTask);
+        connect(widget, &TaskWidget::statusChanged, this, &MainWindow::onTaskStatusChanged);
         
         taskList_->addItem(item);
         taskList_->setItemWidget(item, widget);
         item->setSizeHint(widget->sizeHint());
+        
+        // Полностью скрываем текст
+        item->setData(Qt::DisplayRole, QVariant());
     }
-    
-    statusBar_->showMessage(QString("Задача: %1").arg(taskList_->count()));
 }
 
 // Реализация слотов
@@ -151,9 +152,10 @@ void MainWindow::onTaskStatusChanged(const std::string& desc, bool completed) {
     if (completed) {
         taskManager_.markTaskCompleted(desc);
     } else {
-        // Реализовать markTaskPending в TaskManager
+        taskManager_.markTaskPending(desc);
     }
     database_.save(taskManager_);
+    refreshTaskList(); 
 }
 
 void MainWindow::onFilterTasks(int filterType) {
@@ -193,7 +195,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 }
 
 void MainWindow::loadStyleSheet() {
-    QFile styleFile(":/styles/main.qss");
+    QFile styleFile("resources/styles/main.qss");
     if (styleFile.open(QFile::ReadOnly | QFile::Text)) {
         QString styleSheet = QLatin1String(styleFile.readAll());
         qApp->setStyleSheet(styleSheet); // Применяем ко всему приложению

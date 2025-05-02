@@ -1,59 +1,97 @@
-#include <algorithm>
-#include <ctime>
 #include "task.hpp"
+#include <ctime>
 
+Task::Task(const std::string& title, const std::string& description,
+           const std::string& dueDate, Priority priority,
+           Category category, bool completed)
+    : title(title), description(description), dueDate(dueDate),
+      priority(priority), category(category), completed(completed),
+      creationTime(std::time(nullptr)), completionTime(0) {}
 
-Task::Task(const std::string& description, const std::string& dueDate, 
-    Priority priority, Category category, bool completed)
-: description(description), dueDate(dueDate), priority(priority),
-category(category), completed(completed) {
-creationTime = std::time(nullptr);
-completionTime = 0;
+void Task::setTitle(const std::string& title) {
+    this->title = title;
 }
 
-void Task::markCompleted() {
-completed = true;
-completionTime = std::time(nullptr);
-}
-
-void Task::markPending() {
-completed = false;
-completionTime = 0;
-}
-
-void Task::updateDescription(const std::string& newDescription) {
-description = newDescription;
+void Task::setDescription(const std::string& description) {
+    this->description = description;
 }
 
 void Task::updateDueDate(const std::string& newDueDate) {
-dueDate = newDueDate;
+    dueDate = newDueDate;
 }
 
 void Task::setPriority(Priority newPriority) {
-priority = newPriority;
+    priority = newPriority;
 }
 
 void Task::setCategory(Category newCategory) {
-category = newCategory;
+    category = newCategory;
+}
+
+void Task::markCompleted() {
+    completed = true;
+    completionTime = std::time(nullptr);
+}
+
+void Task::markPending() {
+    completed = false;
+    completionTime = 0;
 }
 
 void Task::addTag(const std::string& tag) {
-if (std::find(tags.begin(), tags.end(), tag) == tags.end()) {
- tags.push_back(tag);
-}
+    tags.push_back(tag);
 }
 
 void Task::removeTag(const std::string& tag) {
-tags.erase(std::remove(tags.begin(), tags.end(), tag), tags.end());
+    for (auto it = tags.begin(); it != tags.end(); ) {
+        if (*it == tag) {
+            it = tags.erase(it);
+        } else {
+            ++it;
+        }
+    }
 }
 
-std::string Task::getDescription() const { return description; }
-std::string Task::getDueDate() const { return dueDate; }
-Priority Task::getPriority() const { return priority; }
-Category Task::getCategory() const { return category; }
-bool Task::isCompleted() const { return completed; }
-std::vector<std::string> Task::getTags() const { return tags; }
-std::time_t Task::getCreationTime() const { return creationTime; }
-std::time_t Task::getCompletionTime() const { return completionTime; }
+std::string Task::getTitle() const {
+    return title;
+}
 
+std::string Task::getDescription() const {
+    return description;
+}
 
+std::string Task::getDueDate() const {
+    return dueDate;
+}
+
+Priority Task::getPriority() const {
+    return priority;
+}
+
+Category Task::getCategory() const {
+    return category;
+}
+
+bool Task::isCompleted() const {
+    return completed;
+}
+
+std::vector<std::string> Task::getTags() const {
+    return tags;
+}
+
+std::time_t Task::getCreationTime() const {
+    return creationTime;
+}
+
+std::time_t Task::getCompletionTime() const {
+    return completionTime;
+}
+
+void Task::setCreationTime(std::time_t time) {
+    creationTime = time;
+}
+
+void Task::setCompletionTime(std::time_t time) {
+    completionTime = time;
+}

@@ -74,6 +74,7 @@
  
      QHBoxLayout *mainLayout_;
      QLabel *descriptionLabel_;
+     QLabel *titleLabel_; 
      QLabel *priorityLabel_;
      QLabel *datesLabel_;
      QPushButton *statusButton_;

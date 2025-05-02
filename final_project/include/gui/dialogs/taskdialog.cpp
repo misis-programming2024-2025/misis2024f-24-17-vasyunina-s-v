@@ -26,23 +26,23 @@ TaskDialog::TaskDialog(const Task& task, QWidget* parent)
 
 void TaskDialog::initUI()
 {
-    setWindowTitle(tr("Task Editor"));
+    setWindowTitle(tr("Редактирование задачи"));
     resize(400, 300);
     
     dueDateEdit->setCalendarPopup(true);
     dueDateEdit->setDisplayFormat("yyyy-MM-dd");
     
-    priorityCombo->addItems({tr("Low"), tr("Medium"), tr("High")});
-    categoryCombo->addItems({tr("Work"), tr("Personal"), tr("Study"), tr("Other")});
+    priorityCombo->addItems({tr("Можно отложить"), tr("Опционально"), tr("Важно")});
+    categoryCombo->addItems({tr("Работа"), tr("Личное"), tr("Учеба"), tr("Другое")});
     
     auto* mainLayout = new QVBoxLayout(this);
     auto* formLayout = new QFormLayout();
     
-    formLayout->addRow(new QLabel(tr("&Title:")), titleEdit);
-    formLayout->addRow(new QLabel(tr("&Description:")), descriptionEdit);
-    formLayout->addRow(new QLabel(tr("&Priority:")), priorityCombo);
-    formLayout->addRow(new QLabel(tr("&Category:")), categoryCombo);
-    formLayout->addRow(new QLabel(tr("&Due Date:")), dueDateEdit);
+    formLayout->addRow(new QLabel(tr("Задача")), titleEdit);
+    formLayout->addRow(new QLabel(tr("Описание")), descriptionEdit);
+    formLayout->addRow(new QLabel(tr("Приоритет")), priorityCombo);
+    formLayout->addRow(new QLabel(tr("Категория")), categoryCombo);
+    formLayout->addRow(new QLabel(tr("Дата дедлайна")), dueDateEdit);
     
     mainLayout->addLayout(formLayout);
     mainLayout->addWidget(buttonBox);
@@ -59,23 +59,19 @@ void TaskDialog::setupConnections()
 
 Task TaskDialog::getTask() const
 {
-    Task task(
-        titleEdit->text().toStdString(),  
+    return Task(
+        titleEdit->text().toStdString(),  // title
+        descriptionEdit->toPlainText().toStdString(),  // description
         dueDateEdit->date().toString("yyyy-MM-dd").toStdString(),
         static_cast<Priority>(priorityCombo->currentIndex()),
         static_cast<Category>(categoryCombo->currentIndex()),
-        false 
+        false
     );
-    if (!descriptionEdit->toPlainText().isEmpty()) {
-        task.updateDescription(descriptionEdit->toPlainText().toStdString());
-    }
-    
-    return task;
 }
 
 void TaskDialog::setTask(const Task& task)
 {
-    titleEdit->setText(QString::fromStdString(task.getDescription()));
+    titleEdit->setText(QString::fromStdString(task.getTitle()));
     descriptionEdit->setPlainText(QString::fromStdString(task.getDescription()));
     priorityCombo->setCurrentIndex(static_cast<int>(task.getPriority()));
     categoryCombo->setCurrentIndex(static_cast<int>(task.getCategory()));
