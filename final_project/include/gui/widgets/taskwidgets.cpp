@@ -4,15 +4,22 @@
 #include <QDate>
 
 TaskWidget::TaskWidget(const Task& task, QWidget *parent) 
-    : QWidget(parent), task_(task) {
-    setupUI();
-    updateStyle();
-    QLabel *titleLabel = new QLabel(QString::fromStdString(task.getTitle()));
+    : QWidget(parent), task_(task) 
+{
+ 
+    QLabel *titleLabel = new QLabel(QString::fromStdString(task.getTitle()), this);
     titleLabel->setStyleSheet("font-weight: bold; font-size: 14px;");
+    titleLabel->setWordWrap(true);
     
-    QVBoxLayout *layout = new QVBoxLayout;
-    layout->addWidget(titleLabel);
-    setLayout(layout);
+    QVBoxLayout *mainLayout = new QVBoxLayout(this);  
+    mainLayout->setContentsMargins(5, 5, 5, 5);     
+    mainLayout->setSpacing(5);                     
+    mainLayout->addWidget(titleLabel);
+    QLabel *descLabel = new QLabel(QString::fromStdString(task.getDescription()), this);
+    descLabel->setStyleSheet("color: #666; font-size: 12px;");
+    descLabel->setWordWrap(true);
+    mainLayout->addWidget(descLabel);
+    updateStyle();
 }
 
 void TaskWidget::updateTask(const Task& task) {

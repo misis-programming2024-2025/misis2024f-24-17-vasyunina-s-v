@@ -90,8 +90,6 @@
      void setupConnections();
      void refreshTaskList();
  
-     // Вспомогательные методы
-     void showErrorMessage(const QString& message);
      const Task*  getSelectedTask() const;
 
      // Загрузка стилей

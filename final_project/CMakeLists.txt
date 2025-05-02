@@ -14,12 +14,19 @@ set(CMAKE_AUTORCC ON)
 
 find_package(Qt5 REQUIRED COMPONENTS Core Widgets Svg) 
 
+# Добавляем ресурсы ДО создания исполняемого файла
+set(RESOURCES_DIR "${CMAKE_SOURCE_DIR}/include/gui/resources")
+qt_add_resources(RESOURCE_FILES "resources.qrc")
+
 add_subdirectory(include/task)
 add_subdirectory(include/taskmanager)
 add_subdirectory(include/database)
 add_subdirectory(include/gui)
 
 add_executable(TaskManager include/main.cpp)  
+
+target_sources(TaskManager PRIVATE ${RESOURCE_FILES})
+
 target_link_libraries(TaskManager PRIVATE
     GUILib
     DatabaseLib

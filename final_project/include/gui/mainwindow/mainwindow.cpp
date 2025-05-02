@@ -64,9 +64,9 @@ void MainWindow::setupMenuBar() {
 }
 
 void MainWindow::setupToolBar() {
-    addAction_->setIcon(QIcon("resources/icons/add.svg"));
-    editAction_->setIcon(QIcon("resources//icons/edit.svg"));
-    deleteAction_->setIcon(QIcon("resources//icons/delete.svg"));
+    addAction_->setIcon(QIcon(":/icons/add.svg"));
+    editAction_->setIcon(QIcon(":/icons/edit.svg"));
+    deleteAction_->setIcon(QIcon(":/icons/delete.svg"));
     
     mainToolBar_->addAction(addAction_);
     mainToolBar_->addAction(editAction_);
@@ -195,7 +195,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 }
 
 void MainWindow::loadStyleSheet() {
-    QFile styleFile("resources/styles/main.qss");
+    QFile styleFile(":/styles/main.qss");
     if (styleFile.open(QFile::ReadOnly | QFile::Text)) {
         QString styleSheet = QLatin1String(styleFile.readAll());
         qApp->setStyleSheet(styleSheet); // Применяем ко всему приложению

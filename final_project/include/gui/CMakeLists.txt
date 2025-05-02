@@ -17,10 +17,6 @@ file(GLOB GUI_SOURCES
     "dialogs/*.hpp"
 )
 
- 
-set(RESOURCE_FILES 
-    "resources/resources.qrc"
-)
 add_library(GUILib STATIC
     ${GUI_SOURCES}
     ${GUI_HEADERS}
