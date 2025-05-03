@@ -29,7 +29,7 @@
      SUBCASE("Range-based for loop") {
          std::set<int> keys;
          for (const auto& kv : ht) {
-             keys.insert(kv.first);  // Используем . вместо ->
+             keys.insert(kv.first); 
          }
          CHECK(keys.size() == 3);
          CHECK(keys.count(1) == 1);
@@ -39,7 +39,7 @@
  
      SUBCASE("Begin and end") {
          auto it = ht.begin();
-         CHECK((*it).first == 1);  // Используем * и . вместо ->
+         CHECK((*it).first == 1); 
          CHECK((*it).second == "one");
          
          ++it;
@@ -58,13 +58,13 @@
      }
  
      SUBCASE("Collision handling") {
-         HashTable<int, int> small_ht(1);  // Все элементы в одной корзине
+         HashTable<int, int> small_ht(1); 
          small_ht.insert(1, 10);
          small_ht.insert(2, 20);
          
          int sum = 0;
          for (const auto& kv : small_ht) {
-             sum += kv.second;  // Используем . вместо ->
+             sum += kv.second; 
          }
          CHECK(sum == 30);
      }
