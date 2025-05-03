@@ -47,15 +47,17 @@ int main(int argc, char** argv) {
 
 ### Как запустить:
 
-g++ main.cpp -o chessboard `pkg-config --cflags --libs opencv4`
-./chessboard --rows 12 --cols 12 --cell 50
+g++ main.cpp -o chessboard `pkg-config --cflags --libs opencv4`  ./chessboard --rows 12 --cols 12 --cell 50
 
 ### Пимеры:
 --rows 12 --cols 12 --cell 50
+
 ![1](chessboard1.png)
 
 --rows 5 --cols 5 --cell 100
+
 ![2](chessboard2.png)
 
 --rows 10 --cols 10 --cell 90
+
 ![2](chessboard3.png)
