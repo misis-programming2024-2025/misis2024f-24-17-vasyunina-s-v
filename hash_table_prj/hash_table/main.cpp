@@ -30,5 +30,8 @@ int main() {
         std::cout << pair.first << ": " << pair.second << std::endl;
     }
 
+    HashTable<std::string, int> empty_table(0);
+    empty_table.insert("test_key", 42);
+
     return 0;
 }

@@ -11,7 +11,6 @@ private:
         KeyType key;
         ValueType value;
         Node* next;
-
         Node(const KeyType& k, const ValueType& v) : key(k), value(v), next(nullptr) {}
     };
 
@@ -61,6 +60,10 @@ HashTable<KeyType, ValueType>::~HashTable() {
 
 template<typename KeyType, typename ValueType>
 void HashTable<KeyType, ValueType>::insert(const KeyType& key, const ValueType& value) {
+    if (table.empty()) {
+        table.resize(16, nullptr);
+    }
+
     size_t index = hash_function(key) % table.size();
     Node* current = table[index];
     
