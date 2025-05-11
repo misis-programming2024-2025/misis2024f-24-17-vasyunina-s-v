@@ -20,26 +20,26 @@ void parseArguments(int argc, char** argv, int& rows, int& cols, int& cellSize) 
     }
 }
 
+void drawChessManual(cv::Mat& img, int rows, int cols, int cellSize) {
+    for (int y = 0; y < rows * cellSize; y++) {
+        int cellY = y / cellSize;
+        for (int x = 0; x < cols * cellSize; x++) {
+            int cellX = x / cellSize;
+            bool isWhite = (cellY + cellX) % 2 == 0;
+            img.data[y * img.step + x * 3 + 0] = isWhite ? 255 : 0; 
+            img.data[y * img.step + x * 3 + 1] = isWhite ? 255 : 0;
+            img.data[y * img.step + x * 3 + 2] = isWhite ? 255 : 0;
+        }
+    }
+}
+
 int main(int argc, char** argv) {
     int rows, cols, cellSize;
     parseArguments(argc, argv, rows, cols, cellSize);
     
-    cv::Mat chessboard(rows * cellSize, cols * cellSize, CV_8UC3, cv::Scalar::all(255));
-    
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols; j++) {
-            cv::Scalar color = (i + j) % 2 == 0 ? cv::Scalar(255, 255, 255) : cv::Scalar(0, 0, 0);
-            cv::rectangle(chessboard,
-                        cv::Point(j * cellSize, i * cellSize),
-                        cv::Point((j + 1) * cellSize, (i + 1) * cellSize),
-                        color,
-                        cv::FILLED);
-        }
-    }
+    cv::Mat chessboard(rows*cellSize, cols*cellSize, CV_8UC3);
+    drawChessManual(chessboard, rows, cols, cellSize);
     
     cv::imwrite("chessboard.png", chessboard);
-    cv::imshow("Chessboard", chessboard);
-    cv::waitKey(0);
-    
     return 0;
 }
