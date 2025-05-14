@@ -13,20 +13,12 @@ public:
 	StackArrT(StackArrT<T>&& other); //move
 	StackArrT(const std::initializer_list<T>& list);
 
-	void push(const T& value);
-	void pop();
-	T& top() const;
-	void swap(StackArrT<T>& other);
-    // значение второго стека с конца приклеиваются к первому стеку
-	void merge(StackArrT<T>& other);
-
-	bool empty() const;
-	std::ptrdiff_t size() const;
+	void push(const T& value) override;
+	void pop() override;
+	T& top() const override;
+	bool empty() const override;
+	std::ptrdiff_t size() const override;
     void clear();
-
-	bool operator==(const StackArrT<T>& rhs) const;
-	bool operator!=(const StackArrT<T>& rhs) const;
-
 	StackArrT<T>& operator=(const StackArrT<T>& rhs) noexcept;
 	StackArrT<T>& operator=(StackArrT<T>&& other);
     std::ostream& printToStream(std::ostream& os) const override;
@@ -44,7 +36,7 @@ private:
 
 
 template <typename T>
-StackArrT<T>::StackArrT() : size_(0), i_top_(-1), data_(nullptr) {}
+StackArrT<T>::StackArrT(): size_(0), i_top_(-1), data_(nullptr) {}
 
 template <typename T>
 StackArrT<T>::~StackArrT() {
@@ -110,34 +102,6 @@ T& StackArrT<T>::top() const {
     }
 
 
-template <typename T>    
-void StackArrT<T>::swap(StackArrT<T>& other) {
-        std::swap(size_, other.size_);
-        std::swap(i_top_, other.i_top_);
-        std::swap(data_, other.data_);
-    }
-
-
-template <typename T>
-void StackArrT<T>::merge(StackArrT<T>& other) {
-    if (this == &other) return;
-    if (other.empty()) return;
-    
-    std::ptrdiff_t new_size = size_ + other.size_;
-    T* new_data = new T[new_size];
-    
-    std::copy(data_, data_ + size_, new_data);
-
-    std::copy(other.data_, other.data_ + other.size_, new_data + size_);
-    
-    delete[] data_;
-    data_ = new_data;
-    size_ = new_size;
-    i_top_ = size_ - 1;
-    
-    other.clear();
-}
-
 template <typename T>
 bool StackArrT<T>::empty() const {
         return i_top_ == -1;
@@ -147,21 +111,6 @@ bool StackArrT<T>::empty() const {
 template <typename T>
 std::ptrdiff_t StackArrT<T>::size() const {
         return size_;
-    }
-
-
-template <typename T>
-bool StackArrT<T>::operator==(const StackArrT<T>& rhs) const {
-        if (size_ != rhs.size_) return false;
-        for (std::ptrdiff_t i = 0; i <= i_top_; ++i) {
-            if (data_[i] != rhs.data_[i]) return false;
-        }
-        return true;
-    }
-
-template <typename T>
-bool StackArrT<T>::operator!=(const StackArrT<T>& rhs) const {
-        return !(*this == rhs);
     }
 
 

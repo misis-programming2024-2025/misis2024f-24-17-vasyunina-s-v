@@ -11,19 +11,12 @@ public:
     StackLstT(StackLstT<T>&& other);
     StackLstT(const std::initializer_list<T>& list);
   
-    void push(const T& value);
-    void pop();
-    T& top() const;
-    void swap(StackLstT<T>& other);
-    void merge(StackLstT<T>& other);
-  
-    bool empty() const;
-    std::ptrdiff_t size() const;
+    void push(const T& value) override;
+    void pop() override;
+    T& top() const override;
+    bool empty() const override;
+    std::ptrdiff_t size() const override;
     void clear();
-
-    bool operator==(const StackLstT<T>& rhs) const;
-    bool operator!=(const StackLstT<T>& rhs) const;
-
     StackLstT<T>& operator=(const StackLstT<T>& rhs) noexcept;
     StackLstT<T>& operator=(StackLstT<T>&& other);
     std::ostream& printToStream(std::ostream& os) const override;
@@ -107,34 +100,6 @@ T& StackLstT<T>::top() const {
 }
 
 template <typename T>
-void StackLstT<T>::swap(StackLstT<T>& other) {
-    std::swap(head_, other.head_);
-}
-
-template <typename T>
-void StackLstT<T>::merge(StackLstT<T>& other) {
-    if (this == &other) {
-        return; // merge самого себя
-    }
-
-    if (other.head_ == nullptr) {
-        return; // нечего мержить
-    }
-    Node* last = head_;
-    if (last != nullptr) {
-        while (last->next != nullptr) {
-                last = last->next;
-        }
-            // Присоединяем другой стек
-        last->next = other.head_;
-    } else {
-            // Если текущий стек пуст, просто берем другой стек
-        head_ = other.head_;
-    }
-    other.head_ = nullptr;
-}
-
-template <typename T>
 bool StackLstT<T>::empty() const {
     return head_ == nullptr;
 }
@@ -149,49 +114,6 @@ std::ptrdiff_t StackLstT<T>::size() const {
     }
     return size;
 }
-
-template <typename T>
-bool StackLstT<T>::operator==(const StackLstT<T>& rhs) const {
-    Node* current1 = head_;
-    Node* current2 = rhs.head_;
-    while (current1 != nullptr && current2 != nullptr) {
-        if (current1->value != current2->value) {
-            return false;
-        }
-        current1 = current1->next;
-        current2 = current2->next;
-    }
-    return current1 == nullptr && current2 == nullptr;
-}
-
-template <typename T>
-bool StackLstT<T>::operator!=(const StackLstT<T>& rhs) const {
-    return !(*this == rhs);
-}
-
-template <typename T>
-StackLstT<T>& StackLstT<T>::operator=(const StackLstT<T>& rhs) noexcept {
-    if (this != &rhs) {
-        StackLstT<T> temp(rhs);
-        swap(temp);
-    }
-    return *this;
-}
-
-template <typename T>
-StackLstT<T>& StackLstT<T>::operator=(StackLstT<T>&& other) {
-    if (size() != other.size()) return false;
-    
-    Node* curr1 = head_;
-    Node* curr2 = other.head_;
-    while (curr1 != nullptr && curr2 != nullptr) {
-        if (curr1->value != curr2->value) return false;
-        curr1 = curr1->next;
-        curr2 = curr2->next;
-    }
-    return true;
-}
-
 
 template <typename T>
 std::ostream& StackLstT<T>::printToStream(std::ostream& os) const {
@@ -257,4 +179,33 @@ bool StackLstT<T>::operator==(const IStackBase<T>& rhs) const {
 template <typename T>
 bool StackLstT<T>::operator!=(const IStackBase<T>& rhs) const {
     return !(*this == rhs);
+}
+
+template <typename T>
+StackLstT<T>& StackLstT<T>::operator=(const StackLstT<T>& rhs) noexcept {
+    if (this != &rhs) { 
+        StackLstT<T> temp;
+        Node* current = rhs.head_;
+        while (current != nullptr) {
+            temp.push(current->value);
+            current = current->next;
+        }
+        clear(); 
+        current = temp.head_;
+        while (current != nullptr) {
+            push(current->value);
+            current = current->next;
+        }
+    }
+    return *this;
+}
+
+template <typename T>
+StackLstT<T>& StackLstT<T>::operator=(StackLstT<T>&& other) {
+    if (this != &other) {
+        clear(); 
+        head_ = other.head_;
+        other.head_ = nullptr; 
+    }
+    return *this;
 }
