@@ -12,7 +12,7 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTORCC ON)
 
-find_package(Qt5 REQUIRED COMPONENTS Core Widgets Svg) 
+find_package(Qt6 REQUIRED COMPONENTS Widgets Core Svg)
 
 # Добавляем ресурсы ДО создания исполняемого файла
 set(RESOURCES_DIR "${CMAKE_SOURCE_DIR}/include/gui/resources")
@@ -32,7 +32,7 @@ target_link_libraries(TaskManager PRIVATE
     DatabaseLib
     TaskLib
     TaskManagerLib
-    Qt5::Core
-    Qt5::Widgets
-    Qt5::Svg
+    Qt6::Core
+    Qt6::Widgets
+    Qt6::Svg
 )

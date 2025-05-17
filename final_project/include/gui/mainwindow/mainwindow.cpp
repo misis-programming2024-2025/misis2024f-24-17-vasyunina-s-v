@@ -2,6 +2,8 @@
 #include <QMessageBox>
 #include <QSettings>
 #include <QCloseEvent>
+#include <QFile>
+#include <QTextStream>  
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent),
@@ -125,44 +127,92 @@ void MainWindow::setupConnections() {
 }
 
 void MainWindow::refreshTaskList() {
+    qDebug() << "MainWindow::refreshTaskList() started";
+    qDebug() << "Clearing task list...";
     taskList_->clear();
     
-    for (const auto& task : taskManager_.getTasks()) {
-        QListWidgetItem *item = new QListWidgetItem();
-        item->setFlags(item->flags() & ~Qt::ItemIsSelectable); 
-        
-        TaskWidget *widget = new TaskWidget(task);
-        
-        connect(widget, &TaskWidget::editRequested, this, &MainWindow::onEditTask);
-        connect(widget, &TaskWidget::statusChanged, this, &MainWindow::onTaskStatusChanged);
-        
-        taskList_->addItem(item);
-        taskList_->setItemWidget(item, widget);
-        item->setSizeHint(widget->sizeHint());
-        
-        // Полностью скрываем текст
-        item->setData(Qt::DisplayRole, QVariant());
+    qDebug() << "Getting tasks from manager...";
+    auto tasks = taskManager_.getTasks();
+    qDebug() << "Number of tasks:" << tasks.size();
+    
+    for (const auto& task : tasks) {
+        qDebug() << "Creating widget for task:" << QString::fromStdString(task.getTitle());
+        try {
+            QListWidgetItem *item = new QListWidgetItem();
+            qDebug() << "Item created";
+            
+            item->setFlags(item->flags() & ~Qt::ItemIsSelectable); 
+            qDebug() << "Flags set";
+            
+            TaskWidget *widget = new TaskWidget(task);
+            qDebug() << "TaskWidget created";
+            
+            connect(widget, &TaskWidget::editRequested, this, &MainWindow::onEditTask);
+            connect(widget, &TaskWidget::statusChanged, this, &MainWindow::onTaskStatusChanged);
+            qDebug() << "Signals connected";
+            
+            taskList_->addItem(item);
+            qDebug() << "Item added to list";
+            
+            taskList_->setItemWidget(item, widget);
+            qDebug() << "Widget set for item";
+            
+            item->setSizeHint(widget->sizeHint());
+            qDebug() << "Size hint set";
+            
+            item->setData(Qt::DisplayRole, QVariant());
+            qDebug() << "Display role cleared";
+        } catch (const std::exception& e) {
+            qDebug() << "Error creating task widget:" << e.what();
+            throw;
+        }
     }
+    qDebug() << "MainWindow::refreshTaskList() completed";
 }
 
 // Реализация слотов
 void MainWindow::onAddTask() {
+    qDebug() << "MainWindow::onAddTask() called";
     TaskDialog dialog(this);
     if (dialog.exec() == QDialog::Accepted) {
-        Task newTask = dialog.getTask();
-        taskManager_.addTask(newTask);
-        refreshTaskList();
-        database_.save(taskManager_);
+        qDebug() << "MainWindow: Dialog accepted, getting task data...";
+        try {
+            Task newTask = dialog.getTask();
+            qDebug() << "MainWindow: Task created, adding to manager...";
+            taskManager_.addTask(newTask);
+            qDebug() << "MainWindow: Refreshing task list...";
+            refreshTaskList();
+            qDebug() << "MainWindow: Saving to database...";
+            database_.save(taskManager_);
+            qDebug() << "MainWindow: Task added successfully";
+        } catch (const std::exception& e) {
+            qDebug() << "MainWindow: Error adding task:" << e.what();
+            QMessageBox::critical(this, tr("Error"), tr("Failed to add task: %1").arg(e.what()));
+        }
     }
 }
 
 void MainWindow::onEditTask() {
+    qDebug() << "MainWindow::onEditTask() called";
     if (auto task = const_cast<Task*>(getSelectedTask())) {
+        qDebug() << "MainWindow: Selected task found, opening dialog...";
         TaskDialog dialog(*task, this);
         if (dialog.exec() == QDialog::Accepted) {
-            *task = dialog.getTask(); 
-            refreshTaskList() ;
+            qDebug() << "MainWindow: Dialog accepted, updating task...";
+            try {
+                *task = dialog.getTask();
+                qDebug() << "MainWindow: Task updated, refreshing list...";
+                refreshTaskList();
+                qDebug() << "MainWindow: Saving to database...";
+                database_.save(taskManager_);
+                qDebug() << "MainWindow: Task updated successfully";
+            } catch (const std::exception& e) {
+                qDebug() << "MainWindow: Error updating task:" << e.what();
+                QMessageBox::critical(this, tr("Error"), tr("Failed to update task: %1").arg(e.what()));
+            }
         }
+    } else {
+        qDebug() << "MainWindow: No task selected";
     }
 }
 
@@ -228,7 +278,7 @@ void MainWindow::closeEvent(QCloseEvent *event) {
 }
 
 void MainWindow::loadStyleSheet() {
-    QFile styleFile(":/styles/main.qss");
+    QFile styleFile("");
     if (styleFile.open(QFile::ReadOnly | QFile::Text)) {
         QString styleSheet = QLatin1String(styleFile.readAll());
         qApp->setStyleSheet(styleSheet); // Применяем ко всему приложению

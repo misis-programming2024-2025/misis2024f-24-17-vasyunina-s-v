@@ -24,11 +24,11 @@ add_library(GUILib STATIC
     ${GUI_RESOURCES}
 )
 
-find_package(Qt5 REQUIRED COMPONENTS Widgets Svg)
+find_package(Qt6 REQUIRED COMPONENTS Widgets Svg)
 
 target_link_libraries(GUILib PRIVATE
-    Qt5::Widgets
-    Qt5::Svg
+    Qt6::Widgets
+    Qt6::Svg
     TaskManagerLib
     DatabaseLib
 )

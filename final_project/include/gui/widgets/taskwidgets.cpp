@@ -2,24 +2,15 @@
 #include <QMouseEvent>
 #include <QPalette>
 #include <QDate>
+#include <QDebug>
 
 TaskWidget::TaskWidget(const Task& task, QWidget *parent) 
     : QWidget(parent), task_(task) 
 {
- 
-    QLabel *titleLabel = new QLabel(QString::fromStdString(task.getTitle()), this);
-    titleLabel->setStyleSheet("font-weight: bold; font-size: 14px;");
-    titleLabel->setWordWrap(true);
-    
-    QVBoxLayout *mainLayout = new QVBoxLayout(this);  
-    mainLayout->setContentsMargins(5, 5, 5, 5);     
-    mainLayout->setSpacing(5);                     
-    mainLayout->addWidget(titleLabel);
-    QLabel *descLabel = new QLabel(QString::fromStdString(task.getDescription()), this);
-    descLabel->setStyleSheet("color: #666; font-size: 12px;");
-    descLabel->setWordWrap(true);
-    mainLayout->addWidget(descLabel);
+    qDebug() << "TaskWidget: Creating widget for task:" << QString::fromStdString(task.getTitle());
+    setupUI();
     updateStyle();
+    qDebug() << "TaskWidget: Widget created successfully";
 }
 
 void TaskWidget::updateTask(const Task& task) {

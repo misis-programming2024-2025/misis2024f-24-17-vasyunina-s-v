@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
     QApplication::setStyle(QStyleFactory::create("Fusion"));  // Современный стиль
     
     // 4. Загрузка глобального стиля из QSS-файла
-    QFile styleFile(":/styles/main.qss");
+    QFile styleFile("");
     if(styleFile.open(QIODevice::ReadOnly | QIODevice::Text))
     {
         app.setStyleSheet(styleFile.readAll());

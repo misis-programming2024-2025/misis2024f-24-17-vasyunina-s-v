@@ -3,7 +3,7 @@ add_library(DatabaseLib STATIC
     database.cpp
     database.hpp
 )
-target_link_libraries(DatabaseLib PRIVATE Qt5::Core)
+target_link_libraries(DatabaseLib PRIVATE Qt6::Core)
 
 find_package(SQLite3 REQUIRED)
 target_link_libraries(DatabaseLib PRIVATE SQLite::SQLite3)

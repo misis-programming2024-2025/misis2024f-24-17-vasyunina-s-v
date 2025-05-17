@@ -2,6 +2,7 @@
 #include <QLabel>
 #include <QMessageBox>
 #include <QPushButton>
+#include <QDebug>
 
 TaskDialog::TaskDialog(QWidget* parent) 
     : QDialog(parent),
@@ -59,14 +60,22 @@ void TaskDialog::setupConnections()
 
 Task TaskDialog::getTask() const
 {
-    return Task(
-        titleEdit->text().toStdString(),  // title
-        descriptionEdit->toPlainText().toStdString(),  // description
-        dueDateEdit->date().toString("yyyy-MM-dd").toStdString(),
-        static_cast<Priority>(priorityCombo->currentIndex()),
-        static_cast<Category>(categoryCombo->currentIndex()),
-        false
-    );
+    qDebug() << "TaskDialog::getTask() called";
+    try {
+        Task task(
+            titleEdit->text().toStdString(),  // title
+            descriptionEdit->toPlainText().toStdString(),  // description
+            dueDateEdit->date().toString("yyyy-MM-dd").toStdString(),
+            static_cast<Priority>(priorityCombo->currentIndex()),
+            static_cast<Category>(categoryCombo->currentIndex()),
+            false
+        );
+        qDebug() << "TaskDialog: Task created successfully";
+        return task;
+    } catch (const std::exception& e) {
+        qDebug() << "TaskDialog: Error creating task:" << e.what();
+        throw;
+    }
 }
 
 void TaskDialog::setTask(const Task& task)
@@ -90,9 +99,17 @@ void TaskDialog::validateInput()
 
 void TaskDialog::accept()
 {
+    qDebug() << "TaskDialog::accept() called, m_isValid =" << m_isValid;
     if (m_isValid) {
+        qDebug() << "TaskDialog: Validating task data before accepting...";
+        qDebug() << "Title:" << titleEdit->text();
+        qDebug() << "Description:" << descriptionEdit->toPlainText();
+        qDebug() << "Priority:" << priorityCombo->currentIndex();
+        qDebug() << "Category:" << categoryCombo->currentIndex();
+        qDebug() << "Due date:" << dueDateEdit->date().toString("yyyy-MM-dd");
         QDialog::accept();
     } else {
+        qDebug() << "TaskDialog: Invalid input, showing warning";
         QMessageBox::warning(this, tr("Invalid Input"), tr("Please enter a task title"));
     }
 }
