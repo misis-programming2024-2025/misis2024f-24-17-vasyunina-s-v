@@ -51,6 +51,12 @@ public:
     void updateTaskDescription(const std::string& oldDescription, const std::string& newDescription);
     
     /**
+     * @brief Полностью обновляет задачу
+     * @param task Новая версия задачи
+     */
+    void updateTask(const Task& task);
+    
+    /**
      * @brief Обновляет срок выполнения задачи.
      * @param description Описание задачи.
      * @param newDueDate Новая дата (формат: "YYYY-MM-DD").

@@ -1,6 +1,7 @@
 #include "taskmanager.hpp"
 #include <algorithm>
 #include <unordered_map>
+#include <iostream>
 
 struct TaskManager::Impl {
     std::unordered_map<std::string, size_t> descriptionToIndex;
@@ -27,9 +28,13 @@ void TaskManager::removeTask(const std::string& description) {
 }
 
 void TaskManager::markTaskCompleted(const std::string& description) {
+    std::cout << "TaskManager: Marking task as completed: " << description << std::endl;
     auto it = findTask(description);
     if (it != tasks.end()) {
+        std::cout << "TaskManager: Task found, marking as completed" << std::endl;
         it->markCompleted();
+    } else {
+        std::cout << "TaskManager: Task not found!" << std::endl;
     }
 }
 
@@ -40,6 +45,32 @@ void TaskManager::updateTaskDescription(const std::string& oldDesc,
         pImpl->descriptionToIndex.erase(oldDesc);
         it->setDescription(newDesc);
         pImpl->descriptionToIndex[newDesc] = std::distance(tasks.begin(), it);
+    }
+}
+
+void TaskManager::updateTask(const Task& task) {
+    auto it = findTask(task.getDescription());
+    if (it != tasks.end()) {
+        // Сохраняем старые значения для обновления индекса
+        std::string oldDesc = it->getDescription();
+        
+        // Обновляем все поля задачи
+        it->setTitle(task.getTitle());
+        it->setDescription(task.getDescription());
+        it->updateDueDate(task.getDueDate());
+        it->setPriority(task.getPriority());
+        it->setCategory(task.getCategory());
+        
+        // Обновляем статус выполнения
+        if (task.isCompleted() && !it->isCompleted()) {
+            it->markCompleted();
+        } else if (!task.isCompleted() && it->isCompleted()) {
+            it->markPending();
+        }
+        
+        // Обновляем индексы
+        pImpl->descriptionToIndex.erase(oldDesc);
+        pImpl->descriptionToIndex[task.getDescription()] = std::distance(tasks.begin(), it);
     }
 }
 
@@ -150,10 +181,14 @@ std::vector<Task>::iterator TaskManager::findTask(const std::string& description
 }
 
 void TaskManager::markTaskPending(const std::string& title) {
+    std::cout << "TaskManager: Marking task as pending: " << title << std::endl;
     auto it = std::find_if(tasks.begin(), tasks.end(),
         [&title](const Task& task) { return task.getTitle() == title; });
     
     if (it != tasks.end()) {
+        std::cout << "TaskManager: Task found, marking as pending" << std::endl;
         it->markPending();
+    } else {
+        std::cout << "TaskManager: Task not found!" << std::endl;
     }
 }

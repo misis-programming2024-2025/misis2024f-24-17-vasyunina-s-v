@@ -123,7 +123,10 @@ void MainWindow::setupConnections() {
     
     // Двойной клик
     connect(taskList_, &QListWidget::itemDoubleClicked, 
-            [this](){ onEditTask(); });
+            [this](){ 
+                qDebug() << "MainWindow: Double click on list item";
+                onEditTask(); 
+            });
 }
 
 void MainWindow::refreshTaskList() {
@@ -194,25 +197,48 @@ void MainWindow::onAddTask() {
 
 void MainWindow::onEditTask() {
     qDebug() << "MainWindow::onEditTask() called";
-    if (auto task = const_cast<Task*>(getSelectedTask())) {
-        qDebug() << "MainWindow: Selected task found, opening dialog...";
-        TaskDialog dialog(*task, this);
-        if (dialog.exec() == QDialog::Accepted) {
-            qDebug() << "MainWindow: Dialog accepted, updating task...";
-            try {
-                *task = dialog.getTask();
-                qDebug() << "MainWindow: Task updated, refreshing list...";
-                refreshTaskList();
-                qDebug() << "MainWindow: Saving to database...";
-                database_.save(taskManager_);
-                qDebug() << "MainWindow: Task updated successfully";
-            } catch (const std::exception& e) {
-                qDebug() << "MainWindow: Error updating task:" << e.what();
-                QMessageBox::critical(this, tr("Error"), tr("Failed to update task: %1").arg(e.what()));
+    const Task* selectedTask = getSelectedTask();
+    if (!selectedTask) {
+        qDebug() << "MainWindow: No task selected, trying to get task from sender";
+        // Попробуем получить задачу из отправителя сигнала
+        if (auto* widget = qobject_cast<TaskWidget*>(sender())) {
+            qDebug() << "MainWindow: Got task from widget:" << QString::fromStdString(widget->getTask().getTitle());
+            TaskDialog dialog(widget->getTask(), this);
+            if (dialog.exec() == QDialog::Accepted) {
+                qDebug() << "MainWindow: Dialog accepted, updating task...";
+                try {
+                    Task updatedTask = dialog.getTask();
+                    qDebug() << "MainWindow: Task updated, refreshing list...";
+                    widget->updateTask(updatedTask);
+                    taskManager_.updateTask(updatedTask);
+                    database_.save(taskManager_);
+                    qDebug() << "MainWindow: Task updated successfully";
+                } catch (const std::exception& e) {
+                    qDebug() << "MainWindow: Error updating task:" << e.what();
+                    QMessageBox::critical(this, tr("Error"), tr("Failed to update task: %1").arg(e.what()));
+                }
             }
+            return;
         }
-    } else {
-        qDebug() << "MainWindow: No task selected";
+        qDebug() << "MainWindow: Could not get task from sender";
+        return;
+    }
+
+    qDebug() << "MainWindow: Selected task found:" << QString::fromStdString(selectedTask->getTitle());
+    TaskDialog dialog(*selectedTask, this);
+    if (dialog.exec() == QDialog::Accepted) {
+        qDebug() << "MainWindow: Dialog accepted, updating task...";
+        try {
+            Task updatedTask = dialog.getTask();
+            qDebug() << "MainWindow: Task updated, refreshing list...";
+            taskManager_.updateTask(updatedTask);
+            refreshTaskList();
+            database_.save(taskManager_);
+            qDebug() << "MainWindow: Task updated successfully";
+        } catch (const std::exception& e) {
+            qDebug() << "MainWindow: Error updating task:" << e.what();
+            QMessageBox::critical(this, tr("Error"), tr("Failed to update task: %1").arg(e.what()));
+        }
     }
 }
 
@@ -232,24 +258,76 @@ void MainWindow::onDeleteTask() {
 }
 
 void MainWindow::onTaskStatusChanged(const std::string& desc, bool completed) {
-    if (completed) {
-        taskManager_.markTaskCompleted(desc);
-    } else {
-        taskManager_.markTaskPending(desc);
+    qDebug() << "MainWindow::onTaskStatusChanged() called for task:" << QString::fromStdString(desc) 
+             << "completed:" << completed;
+    
+    try {
+        if (completed) {
+            taskManager_.markTaskCompleted(desc);
+        } else {
+            taskManager_.markTaskPending(desc);
+        }
+        database_.save(taskManager_);
+        
+        // Вместо полного обновления списка, применяем текущий фильтр
+        qDebug() << "Applying current filter after status change";
+        onFilterTasks(filterCombo_->currentIndex());
+        
+        qDebug() << "Task status updated successfully";
+    } catch (const std::exception& e) {
+        qDebug() << "Error updating task status:" << e.what();
+        QMessageBox::critical(this, tr("Error"), tr("Failed to update task status: %1").arg(e.what()));
     }
-    database_.save(taskManager_);
-    refreshTaskList(); 
 }
 
 void MainWindow::onFilterTasks(int filterType) {
+    qDebug() << "MainWindow::onFilterTasks() called with filter type:" << filterType;
     std::vector<Task> filtered;
     
     switch(filterType) {
-        case 0: filtered = taskManager_.getTasks(); break;
-        case 1: filtered = taskManager_.getTasksByPriority(Priority::High); break;
-        case 2: filtered = taskManager_.getCompletedTasks(); break;
-        case 3: filtered = taskManager_.getPendingTasks(); break;
+        case 0: // Все задачи
+            qDebug() << "Filtering: All tasks";
+            filtered = taskManager_.getTasks(); 
+            break;
+        case 1: // Приоритетные
+            qDebug() << "Filtering: High priority tasks";
+            filtered = taskManager_.getTasksByPriority(Priority::High); 
+            break;
+        case 2: // Выполненные
+            qDebug() << "Filtering: Completed tasks";
+            filtered = taskManager_.getCompletedTasks(); 
+            break;
+        case 3: // В процессе
+            qDebug() << "Filtering: Pending tasks";
+            filtered = taskManager_.getPendingTasks(); 
+            break;
     }
+    
+    qDebug() << "Number of filtered tasks:" << filtered.size();
+    
+    // Очищаем список
+    taskList_->clear();
+    
+    // Добавляем отфильтрованные задачи
+    for (const auto& task : filtered) {
+        qDebug() << "Adding filtered task:" << QString::fromStdString(task.getTitle());
+        try {
+            QListWidgetItem *item = new QListWidgetItem();
+            item->setFlags(item->flags() & ~Qt::ItemIsSelectable);
+            
+            TaskWidget *widget = new TaskWidget(task);
+            connect(widget, &TaskWidget::editRequested, this, &MainWindow::onEditTask);
+            connect(widget, &TaskWidget::statusChanged, this, &MainWindow::onTaskStatusChanged);
+            
+            taskList_->addItem(item);
+            taskList_->setItemWidget(item, widget);
+            item->setSizeHint(widget->sizeHint());
+            item->setData(Qt::DisplayRole, QVariant());
+        } catch (const std::exception& e) {
+            qDebug() << "Error creating task widget for filtered task:" << e.what();
+        }
+    }
+    qDebug() << "Filtering completed";
 }
 
 const Task* MainWindow::getSelectedTask() const {

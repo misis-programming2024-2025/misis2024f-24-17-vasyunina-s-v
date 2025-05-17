@@ -14,8 +14,12 @@ TaskWidget::TaskWidget(const Task& task, QWidget *parent)
 }
 
 void TaskWidget::updateTask(const Task& task) {
+    qDebug() << "TaskWidget: Updating task from" << QString::fromStdString(task_.getTitle()) 
+             << "to" << QString::fromStdString(task.getTitle());
     task_ = task;
+    titleLabel_->setText(QString::fromStdString(task.getTitle()));
     updateStyle();
+    qDebug() << "TaskWidget: Task updated successfully";
 }
 
 const Task& TaskWidget::getTask() const {
@@ -23,11 +27,13 @@ const Task& TaskWidget::getTask() const {
 }
 
 void TaskWidget::mouseDoubleClickEvent(QMouseEvent *event) {
+    qDebug() << "TaskWidget: Double click detected for task:" << QString::fromStdString(task_.getTitle());
     Q_EMIT editRequested(task_.getTitle());
     QWidget::mouseDoubleClickEvent(event);
 }
 
 void TaskWidget::setupUI() {
+    qDebug() << "TaskWidget: Setting up UI for task:" << QString::fromStdString(task_.getTitle());
     // Основной layout
     mainLayout_ = new QHBoxLayout(this);
     mainLayout_->setContentsMargins(5, 5, 5, 5);
@@ -64,15 +70,36 @@ void TaskWidget::setupUI() {
 
     // Соединение сигналов
     connect(statusButton_, &QPushButton::clicked, [this](bool checked) {
-        Q_EMIT statusChanged(task_.getTitle(), checked);  
+        qDebug() << "TaskWidget: Status button clicked for task:" << QString::fromStdString(task_.getTitle())
+                 << "Current status:" << task_.isCompleted()
+                 << "New status:" << checked;
+        
+        // Обновляем локальное состояние задачи
+        if (checked) {
+            task_.markCompleted();
+        } else {
+            task_.markPending();
+        }
+        
+        // Обновляем внешний вид
+        updateStyle();
+        
+        // Отправляем сигнал
+        Q_EMIT statusChanged(task_.getDescription(), checked);
+        qDebug() << "TaskWidget: Status change signal emitted";
     });
 
     connect(editButton_, &QPushButton::clicked, [this]() {
+        qDebug() << "TaskWidget: Edit button clicked for task:" << QString::fromStdString(task_.getTitle());
         Q_EMIT editRequested(task_.getTitle());  
     });
+    qDebug() << "TaskWidget: UI setup completed";
 }
 
 void TaskWidget::updateStyle() {
+    qDebug() << "TaskWidget: Updating style for task:" << QString::fromStdString(task_.getTitle())
+             << "Completed:" << task_.isCompleted();
+             
     // Обновление цвета приоритета
     priorityLabel_->setStyleSheet(
         QString("background-color: %1; border-radius: 10px;").arg(priorityToColor(task_.getPriority()))
@@ -95,6 +122,7 @@ void TaskWidget::updateStyle() {
     } else {
         setStyleSheet("");
     }
+    qDebug() << "TaskWidget: Style updated";
 }
 
 QString TaskWidget::priorityToColor(Priority priority) const {
