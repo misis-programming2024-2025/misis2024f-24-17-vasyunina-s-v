@@ -18,6 +18,8 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets Core Svg)
 set(RESOURCES_DIR "${CMAKE_SOURCE_DIR}/include/gui/resources")
 qt_add_resources(RESOURCE_FILES "resources.qrc")
 
+include_directories(${CMAKE_SOURCE_DIR}/../doctest)
+
 add_subdirectory(include/task)
 add_subdirectory(include/taskmanager)
 add_subdirectory(include/database)
@@ -36,3 +38,15 @@ target_link_libraries(TaskManager PRIVATE
     Qt6::Widgets
     Qt6::Svg
 )
+
+# Тесты
+enable_testing()
+add_executable(TaskManagerTests tests/tests.cpp)
+target_link_libraries(TaskManagerTests PRIVATE
+    TaskLib
+    TaskManagerLib
+    DatabaseLib
+    Qt6::Core
+)
+
+add_test(NAME TaskManagerTests COMMAND TaskManagerTests)
