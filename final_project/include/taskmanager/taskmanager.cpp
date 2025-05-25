@@ -27,9 +27,11 @@ void TaskManager::removeTask(const std::string& description) {
     }
 }
 
-void TaskManager::markTaskCompleted(const std::string& description) {
-    std::cout << "TaskManager: Marking task as completed: " << description << std::endl;
-    auto it = findTask(description);
+void TaskManager::markTaskCompleted(const std::string& title) {
+    std::cout << "TaskManager: Marking task as completed: " << title << std::endl;
+    auto it = std::find_if(tasks.begin(), tasks.end(),
+        [&title](const Task& task) { return task.getTitle() == title; });
+    
     if (it != tasks.end()) {
         std::cout << "TaskManager: Task found, marking as completed" << std::endl;
         it->markCompleted();

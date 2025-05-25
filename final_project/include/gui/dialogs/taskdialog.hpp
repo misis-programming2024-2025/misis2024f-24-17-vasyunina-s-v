@@ -36,6 +36,7 @@ private:
     QDateEdit* dueDateEdit;
     QDialogButtonBox* buttonBox;
     bool m_isValid;
+    bool m_isCompleted;
 };
 
 #endif

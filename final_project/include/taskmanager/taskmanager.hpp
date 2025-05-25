@@ -38,9 +38,9 @@ public:
     
     /**
      * @brief Отмечает задачу как выполненную.
-     * @param description Описание задачи.
+     * @param title Заголовок задачи.
      */
-    void markTaskCompleted(const std::string& description);
+    void markTaskCompleted(const std::string& title);
     void markTaskPending(const std::string& title);
     
     /**

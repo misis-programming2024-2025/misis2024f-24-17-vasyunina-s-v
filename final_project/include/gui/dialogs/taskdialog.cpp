@@ -12,7 +12,8 @@ TaskDialog::TaskDialog(QWidget* parent)
       categoryCombo(new QComboBox(this)),
       dueDateEdit(new QDateEdit(QDate::currentDate(), this)),
       buttonBox(new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this)),
-      m_isValid(false)
+      m_isValid(false),
+      m_isCompleted(false)
 {
     initUI();
     setupConnections();
@@ -68,9 +69,9 @@ Task TaskDialog::getTask() const
             dueDateEdit->date().toString("yyyy-MM-dd").toStdString(),
             static_cast<Priority>(priorityCombo->currentIndex()),
             static_cast<Category>(categoryCombo->currentIndex()),
-            false
+            m_isCompleted  // Используем сохраненный статус
         );
-        qDebug() << "TaskDialog: Task created successfully";
+        qDebug() << "TaskDialog: Task created successfully with completed status:" << m_isCompleted;
         return task;
     } catch (const std::exception& e) {
         qDebug() << "TaskDialog: Error creating task:" << e.what();
@@ -84,6 +85,7 @@ void TaskDialog::setTask(const Task& task)
     descriptionEdit->setPlainText(QString::fromStdString(task.getDescription()));
     priorityCombo->setCurrentIndex(static_cast<int>(task.getPriority()));
     categoryCombo->setCurrentIndex(static_cast<int>(task.getCategory()));
+    m_isCompleted = task.isCompleted();  // Сохраняем статус
     
     QDate date = QDate::fromString(QString::fromStdString(task.getDueDate()), "yyyy-MM-dd");
     if (date.isValid()) {

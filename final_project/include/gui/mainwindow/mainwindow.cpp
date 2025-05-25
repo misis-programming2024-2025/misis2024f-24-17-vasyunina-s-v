@@ -257,23 +257,37 @@ void MainWindow::onDeleteTask() {
     }
 }
 
-void MainWindow::onTaskStatusChanged(const std::string& desc, bool completed) {
-    qDebug() << "MainWindow::onTaskStatusChanged() called for task:" << QString::fromStdString(desc) 
+void MainWindow::onTaskStatusChanged(const std::string& title, bool completed) {
+    qDebug() << "MainWindow::onTaskStatusChanged() called for task:" << QString::fromStdString(title) 
              << "completed:" << completed;
     
     try {
-        if (completed) {
-            taskManager_.markTaskCompleted(desc);
-        } else {
-            taskManager_.markTaskPending(desc);
+        // Найдем задачу по заголовку
+        auto tasks = taskManager_.getTasks();
+        for (const auto& task : tasks) {
+            if (task.getTitle() == title) {
+                if (completed) {
+                    taskManager_.markTaskCompleted(title);
+                } else {
+                    taskManager_.markTaskPending(title);
+                }
+                database_.save(taskManager_);
+                
+                // Обновим только виджет этой задачи
+                for (int i = 0; i < taskList_->count(); ++i) {
+                    auto item = taskList_->item(i);
+                    auto widget = static_cast<TaskWidget*>(taskList_->itemWidget(item));
+                    if (widget->getTask().getTitle() == title) {
+                        widget->updateTask(task);
+                        break;
+                    }
+                }
+                
+                qDebug() << "Task status updated successfully";
+                return;
+            }
         }
-        database_.save(taskManager_);
-        
-        // Вместо полного обновления списка, применяем текущий фильтр
-        qDebug() << "Applying current filter after status change";
-        onFilterTasks(filterCombo_->currentIndex());
-        
-        qDebug() << "Task status updated successfully";
+        qDebug() << "Task not found:" << QString::fromStdString(title);
     } catch (const std::exception& e) {
         qDebug() << "Error updating task status:" << e.what();
         QMessageBox::critical(this, tr("Error"), tr("Failed to update task status: %1").arg(e.what()));

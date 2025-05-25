@@ -57,6 +57,7 @@ void TaskWidget::setupUI() {
     statusButton_->setFixedSize(24, 24);
     statusButton_->setCheckable(true);
     statusButton_->setChecked(task_.isCompleted());
+    statusButton_->setAutoExclusive(false);
     
     editButton_ = new QPushButton("✏", this);
     editButton_->setFixedSize(24, 24);
@@ -72,21 +73,26 @@ void TaskWidget::setupUI() {
     connect(statusButton_, &QPushButton::clicked, [this](bool checked) {
         qDebug() << "TaskWidget: Status button clicked for task:" << QString::fromStdString(task_.getTitle())
                  << "Current status:" << task_.isCompleted()
-                 << "New status:" << checked;
+                 << "New status:" << checked
+                 << "Button state:" << statusButton_->isChecked();
         
         // Обновляем локальное состояние задачи
         if (checked) {
             task_.markCompleted();
+            qDebug() << "TaskWidget: Task marked as completed";
         } else {
             task_.markPending();
+            qDebug() << "TaskWidget: Task marked as pending";
         }
         
         // Обновляем внешний вид
         updateStyle();
         
-        // Отправляем сигнал
-        Q_EMIT statusChanged(task_.getDescription(), checked);
-        qDebug() << "TaskWidget: Status change signal emitted";
+        // Отправляем сигнал с правильным описанием задачи
+        Q_EMIT statusChanged(task_.getTitle(), checked);
+        qDebug() << "TaskWidget: Status change signal emitted with title:" 
+                 << QString::fromStdString(task_.getTitle()) 
+                 << "and status:" << checked;
     });
 
     connect(editButton_, &QPushButton::clicked, [this]() {
